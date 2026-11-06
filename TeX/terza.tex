@@ -1,37 +1,30 @@
 \documentclass[12pt,a4paper,openany]{book}
 
-% --- Lingua e codifica ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
 \usepackage{lmodern}
 
-% --- Pagina ---
 \usepackage[top=2.5cm,bottom=2.5cm,inner=3cm,outer=2.5cm]{geometry}
 \usepackage{microtype}
 
-% --- Matematica ---
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{cancel}
 
-% --- Grafici e figure ---
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta,calc,intersections}
 
-% --- Elenchi, tabelle, unita' di misura ---
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{siunitx}
 \sisetup{locale=IT}
 
-% --- Collegamenti ipertestuali ---
 \usepackage[hidelinks]{hyperref}
 
-% --- Ambienti teorici ---
 \theoremstyle{definition}
 \newtheorem{definizione}{Definizione}[section]
 \newtheorem{esempio}{Esempio}[section]
@@ -46,7 +39,6 @@
 \newtheorem*{osservazione}{Osservazione}
 \newtheorem*{nota}{Nota}
 
-% --- Comandi personalizzati ---
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -58,7 +50,6 @@
 \DeclareMathOperator{\cotg}{cotg}
 \DeclareMathOperator{\settsen}{sett\,sen}
 
-% --- Titolo ---
 \title{Tutta la matematica, passo dopo passo\\[0.5em]\large Matematica per la terza superiore}
 \author{Marco Galanti}
 \date{}
@@ -67,16 +58,6 @@
 
 \maketitle
 \tableofcontents
-
-% Argomenti tipici del programma di terza:
-% - Equazioni e disequazioni irrazionali
-% - La parabola
-% - La circonferenza
-% - L'ellisse
-% - L'iperbole
-% - Funzioni esponenziali e logaritmiche
-% - Equazioni e disequazioni esponenziali e logaritmiche
-% - Goniometria (primi elementi)
 
 \chapter{Disequazioni}
 
