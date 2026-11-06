@@ -1,0 +1,1626 @@
+\documentclass[12pt,a4paper,openany]{book}
+
+% --- Lingua e codifica ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+
+% --- Pagina ---
+\usepackage[top=2.5cm,bottom=2.5cm,inner=3cm,outer=2.5cm]{geometry}
+\usepackage{microtype}
+
+% --- Matematica ---
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{cancel}
+
+% --- Grafici e figure ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,intersections}
+
+% --- Elenchi, tabelle, unita' di misura ---
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\sisetup{locale=IT}
+
+% --- Collegamenti ipertestuali ---
+\usepackage[hidelinks]{hyperref}
+
+% --- Ambienti teorici ---
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}[section]
+\newtheorem{esempio}{Esempio}[section]
+\newtheorem{esercizio}{Esercizio}[section]
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposizione}[teorema]{Proposizione}
+\newtheorem{corollario}[teorema]{Corollario}
+
+\theoremstyle{remark}
+\newtheorem*{osservazione}{Osservazione}
+\newtheorem*{nota}{Nota}
+
+% --- Comandi personalizzati ---
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\sistema}[1]{\begin{cases}#1\end{cases}}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\settsen}{sett\,sen}
+
+% --- Titolo ---
+\title{Tutta la matematica, passo dopo passo\\[0.5em]\large Matematica per la terza superiore}
+\author{Marco Galanti}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% Argomenti tipici del programma di terza:
+% - Equazioni e disequazioni irrazionali
+% - La parabola
+% - La circonferenza
+% - L'ellisse
+% - L'iperbole
+% - Funzioni esponenziali e logaritmiche
+% - Equazioni e disequazioni esponenziali e logaritmiche
+% - Goniometria (primi elementi)
+
+\chapter{Disequazioni}
+
+\section{Disequazioni di secondo grado}
+
+\begin{definizione}
+Si chiama \emph{disequazione di secondo grado} in una incognita $x$ una disequazione riconducibile a una delle forme
+\[
+ax^2+bx+c>0,\qquad ax^2+bx+c\ge 0,\qquad ax^2+bx+c<0,\qquad ax^2+bx+c\le 0,
+\]
+con $a,b,c\in\R$ e $a\neq 0$.
+\end{definizione}
+
+\begin{osservazione}
+Se $a<0$, si moltiplicano entrambi i membri per $-1$ \emph{cambiando il verso della disuguaglianza}, in modo da avere sempre $a>0$.
+\end{osservazione}
+
+\subsection*{Il metodo della parabola}
+
+Data la disequazione in forma normale con $a>0$, si considera la funzione $y=ax^2+bx+c$, il cui grafico è una parabola con la concavità rivolta verso l'alto. Risolvere la disequazione significa stabilire per quali valori di $x$ la parabola si trova al di sopra dell'asse $x$ ($y>0$) oppure al di sotto ($y<0$). Le posizioni della parabola rispetto all'asse $x$ dipendono dal segno del discriminante $\Delta=b^2-4ac$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[axis lines=middle, xlabel=$x$, ylabel=$y$,
+  xmin=-2.5, xmax=3.5, ymin=-3, ymax=5, width=0.6\textwidth,
+  xtick={-1,2}, xticklabels={$x_1$,$x_2$}, ytick=\empty]
+\addplot[domain=-2.2:3.2, samples=60, thick]{x^2-x-2};
+\end{axis}
+\end{tikzpicture}
+\caption{Parabola con $a>0$ e $\Delta>0$: è positiva per $x<x_1$ e per $x>x_2$, negativa per $x_1<x<x_2$.}
+\end{figure}
+
+\begin{teorema}
+Siano $a>0$ e $\Delta=b^2-4ac$. Le soluzioni della disequazione $ax^2+bx+c\gtrless 0$ sono riassunte nella seguente tabella, dove $x_1<x_2$ sono le radici reali dell'equazione associata quando $\Delta>0$ e $x_1$ è la radice doppia quando $\Delta=0$.
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+ & $\Delta>0$ & $\Delta=0$ & $\Delta<0$ \\
+\midrule
+$ax^2+bx+c>0$ & $x<x_1\ \lor\ x>x_2$ & $x\neq x_1$ & $\forall x\in\R$ \\
+$ax^2+bx+c\ge 0$ & $x\le x_1\ \lor\ x\ge x_2$ & $\forall x\in\R$ & $\forall x\in\R$ \\
+$ax^2+bx+c<0$ & $x_1<x<x_2$ & impossibile & impossibile \\
+$ax^2+bx+c\le 0$ & $x_1\le x\le x_2$ & $x=x_1$ & impossibile \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{teorema}
+
+\begin{esempio}
+Risolvere $x^2-5x+6>0$.
+
+L'equazione associata $x^2-5x+6=0$ ha $\Delta=1>0$ e radici $x_1=2$, $x_2=3$. Poiché $a=1>0$ e il verso è $>$, si prendono i valori esterni alle radici:
+\[
+x<2\ \lor\ x>3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $-x^2+4x-3\ge 0$.
+
+Si moltiplica per $-1$ cambiando il verso: $x^2-4x+3\le 0$. L'equazione associata ha radici $x_1=1$, $x_2=3$ e il verso è $\le$, quindi si prendono i valori interni, estremi inclusi:
+\[
+1\le x\le 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^2-6x+9>0$.
+
+Si ha $\Delta=0$ e $x_1=3$. La parabola è tangente all'asse $x$ nel punto di ascissa $3$ e sta sopra l'asse altrove, quindi la soluzione è $x\neq 3$.
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^2+2x+5<0$.
+
+Si ha $\Delta=4-20=-16<0$: la parabola sta tutta sopra l'asse $x$, quindi la disequazione è impossibile.
+\end{esempio}
+
+\begin{esercizio}
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^2-7x+10<0$ \hfill $[2<x<5]$
+\item $2x^2+x-1\ge 0$ \hfill $[x\le -1\ \lor\ x\ge \tfrac12]$
+\item $x^2-4x+4\le 0$ \hfill $[x=2]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Disequazioni di grado superiore al secondo scomponibili}
+
+\begin{definizione}
+Una \emph{disequazione di grado $n>2$} è una disequazione riconducibile alla forma $P(x)\gtrless 0$, dove $P(x)$ è un polinomio di grado $n$.
+\end{definizione}
+
+Il metodo generale consiste nella \emph{scomposizione in fattori} del polinomio e nello \emph{studio del segno} del prodotto.
+
+\paragraph{Procedimento.}
+\begin{enumerate}[label=\arabic*)]
+\item Si porta la disequazione nella forma $P(x)\gtrless 0$, con zero al secondo membro.
+\item Si scompone $P(x)$ in fattori di primo e di secondo grado (raccoglimento a fattor comune, differenza di quadrati, regola di Ruffini, trinomio caratteristico, ecc.).
+\item Si studia il segno di ciascun fattore, ponendo ognuno maggiore di zero.
+\item Si riportano i risultati in una tabella dei segni e si applica la regola dei segni al prodotto.
+\item Si scelgono gli intervalli in cui il prodotto ha il segno richiesto dalla disequazione.
+\end{enumerate}
+
+\begin{esempio}
+Risolvere $x^3-4x>0$.
+
+Raccogliendo $x$ e applicando la differenza di quadrati si ottiene $x(x-2)(x+2)>0$. I fattori si annullano in $-2$, $0$, $2$.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|ccccccc}
+ & & $-2$ & & $0$ & & $2$ & \\
+\hline
+$x+2>0$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$x>0$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-2>0$ & $-$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\hline
+Prodotto & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+Il prodotto è positivo per
+\[
+-2<x<0\ \lor\ x>2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^3-2x^2-5x+6>0$.
+
+Si osserva che $x=1$ annulla il polinomio. Con la regola di Ruffini si ottiene
+\[
+x^3-2x^2-5x+6=(x-1)(x^2-x-6)=(x-1)(x-3)(x+2).
+\]
+Studiando il segno dei tre fattori (radici $-2$, $1$, $3$) il prodotto risulta positivo per
+\[
+-2<x<1\ \lor\ x>3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere la disequazione biquadratica $x^4-5x^2+4\ge 0$.
+
+Si scompone $x^4-5x^2+4=(x^2-1)(x^2-4)=(x-1)(x+1)(x-2)(x+2)$. Le radici sono $-2$, $-1$, $1$, $2$ e, studiando il segno del prodotto, si ottiene
+\[
+x\le -2\ \lor\ -1\le x\le 1\ \lor\ x\ge 2.
+\]
+\end{esempio}
+
+\begin{osservazione}
+Un fattore elevato a potenza pari è sempre non negativo e si annulla solo nella sua radice: non influisce sul segno del prodotto, ma il suo zero va considerato separatamente quando la disequazione non è stretta o quando il verso richiesto lo esclude.
+\end{osservazione}
+
+\begin{esercizio}
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^3-x>0$ \hfill $[-1<x<0\ \lor\ x>1]$
+\item $x^3-2x^2-5x+6\le 0$ \hfill $[x\le -2\ \lor\ 1\le x\le 3]$
+\item $x^4-5x^2+4<0$ \hfill $[-2<x<-1\ \lor\ 1<x<2]$
+\end{enumerate}
+\end{esercizio}
+
+\subsection*{Le principali tecniche di scomposizione}
+
+Per scomporre $P(x)$ si usano, nell'ordine in cui conviene tentarli:
+\begin{itemize}
+\item \emph{raccoglimento totale}: $ax^3+bx^2=x^2(ax+b)$;
+\item \emph{raccoglimento parziale}: $x^3+x^2-4x-4=x^2(x+1)-4(x+1)=(x+1)(x^2-4)$;
+\item \emph{prodotti notevoli}: $A^2-B^2=(A-B)(A+B)$ e $A^2\pm 2AB+B^2=(A\pm B)^2$;
+\item \emph{somma e differenza di cubi}: $A^3\pm B^3=(A\pm B)(A^2\mp AB+B^2)$;
+\item \emph{regola di Ruffini}: se $P(\alpha)=0$, allora $P(x)$ è divisibile per $x-\alpha$.
+\end{itemize}
+Le eventuali radici razionali di un polinomio a coefficienti interi vanno cercate tra i rapporti $p/q$, con $p$ divisore del termine noto e $q$ divisore del coefficiente di grado massimo.
+
+\subsection*{Il segno dei fattori}
+
+\begin{teorema}[Alternanza dei segni]
+Sia $P(x)=(x-\alpha_1)^{m_1}\cdots(x-\alpha_k)^{m_k}$ con $\alpha_1<\dots<\alpha_k$. Nell'intervallo $x>\alpha_k$ il polinomio è positivo. Passando da un intervallo a quello immediatamente a sinistra attraverso una radice $\alpha_i$, il segno cambia se $m_i$ è dispari e rimane lo stesso se $m_i$ è pari.
+\end{teorema}
+
+Un fattore di secondo grado con $\Delta<0$ e coefficiente direttivo positivo è sempre positivo e può quindi essere omesso nello studio del segno; se invece il coefficiente direttivo è negativo, è sempre negativo e fa cambiare il verso della disequazione.
+
+\begin{esempio}
+Risolvere $x^3+x^2-4x-4\le 0$.
+
+Con il raccoglimento parziale si ha $(x+1)(x-2)(x+2)\le 0$. Le radici sono $-2$, $-1$, $2$, tutte semplici. Per $x>2$ il prodotto è positivo; i segni si alternano nei tre intervalli precedenti. Il prodotto è negativo o nullo per
+\[
+x\le -2\ \lor\ -1\le x\le 2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^3-8>0$.
+
+Per la differenza di cubi, $x^3-8=(x-2)(x^2+2x+4)$. Il fattore $x^2+2x+4$ ha $\Delta=4-16<0$ e coefficiente direttivo positivo, quindi è sempre positivo. La disequazione equivale a $x-2>0$, cioè
+\[
+x>2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^3-3x+2>0$.
+
+Poiché $x=1$ è radice, con la regola di Ruffini si ottiene $x^3-3x+2=(x-1)^2(x+2)$. Il fattore $(x-1)^2$ è positivo per $x\neq 1$ e nullo per $x=1$, quindi la disequazione equivale a $x+2>0$ con $x\neq 1$:
+\[
+-2<x<1\ \lor\ x>1.
+\]
+Per la disequazione $x^3-3x+2\le 0$ si ottiene invece $x\le -2\ \lor\ x=1$.
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^3>3x^2-2x$.
+
+Si porta tutto al primo membro: $x^3-3x^2+2x>0$, cioè $x(x-1)(x-2)>0$. Le radici sono $0$, $1$, $2$; per $x>2$ il prodotto è positivo e i segni si alternano:
+\[
+0<x<1\ \lor\ x>2.
+\]
+\end{esempio}
+
+\begin{osservazione}
+Non si deve mai dividere entrambi i membri per un'espressione che contiene l'incognita, se non se ne conosce il segno: si perderebbero soluzioni o si invertirebbe il verso in modo scorretto. Per questo nell'esempio precedente si è portato tutto al primo membro e si è raccolto $x$.
+\end{osservazione}
+
+\begin{esercizio}
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^3-9x\ge 0$ \hfill $[-3\le x\le 0\ \lor\ x\ge 3]$
+\item $x^3+x^2-4x-4>0$ \hfill $[-2<x<-1\ \lor\ x>2]$
+\item $x^3+8\le 0$ \hfill $[x\le -2]$
+\item $x^4-16<0$ \hfill $[-2<x<2]$
+\item $x^3-3x+2\le 0$ \hfill $[x\le -2\ \lor\ x=1]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: disequazioni di grado superiore al secondo}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $x^4-5x^3+6x^2>0$.
+
+\emph{Scomposizione.} Raccogliendo $x^2$ si ottiene $x^2(x^2-5x+6)=x^2(x-2)(x-3)$.
+
+\emph{Studio del segno.}
+\begin{itemize}
+\item $x^2>0$ per $x\neq 0$;
+\item $x-2>0$ per $x>2$;
+\item $x-3>0$ per $x>3$.
+\end{itemize}
+
+\emph{Soluzione.} Il fattore $x^2$ è sempre positivo tranne in $x=0$, dove si annulla: la disuguaglianza è stretta, quindi $x=0$ va escluso. Per $x\neq 0$ il segno del prodotto è quello di $(x-2)(x-3)$, positivo all'esterno delle radici:
+\[
+x<0\ \lor\ 0<x<2\ \lor\ x>3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^5-x^3<0$.
+
+\emph{Scomposizione.} $x^5-x^3=x^3(x^2-1)=x^3(x-1)(x+1)$.
+
+\emph{Segno.} Le radici sono $-1$, $0$ (di molteplicità $3$, dispari) e $1$: tutte cambiano il segno. Per $x>1$ il prodotto è positivo; procedendo verso sinistra il segno diventa negativo in $(0,1)$, positivo in $(-1,0)$ e negativo per $x<-1$.
+
+\emph{Soluzione.} Si richiede il prodotto negativo:
+\[
+x<-1\ \lor\ 0<x<1.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^3-4x^2\ge 0$ \hfill $[x=0\ \lor\ x\ge 4]$
+\item $x^3-25x<0$ \hfill $[x<-5\ \lor\ 0<x<5]$
+\item $x^4-1>0$ \hfill $[x<-1\ \lor\ x>1]$
+\item $2x^3-8x^2+6x\le 0$ \hfill $[x\le 0\ \lor\ 1\le x\le 3]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^3-2x^2-x+2>0$ \hfill $[-1<x<1\ \lor\ x>2]$
+\item $x^3+27>0$ \hfill $[x>-3]$
+\item $x^4-3x^2-4\le 0$ \hfill $[-2\le x\le 2]$
+\item $x^3-6x^2+12x-8\ge 0$ \hfill $[x\ge 2]$
+\item $x^3-3x^2+3x-1<0$ \hfill $[x<1]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^4-2x^3-x^2+2x\ge 0$ \hfill $[x\le -1\ \lor\ 0\le x\le 1\ \lor\ x\ge 2]$
+\item $x^4-x^3-6x^2\le 0$ \hfill $[-2\le x\le 3]$
+\item $x^4-x^2\ge 0$ \hfill $[x\le -1\ \lor\ x=0\ \lor\ x\ge 1]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: ripasso delle equazioni di grado superiore al secondo}
+
+\subsection*{Richiami di teoria}
+
+\begin{teorema}[Legge di annullamento del prodotto]
+Un prodotto di fattori è nullo se e soltanto se almeno uno dei fattori è nullo:
+\[
+A(x)\cdot B(x)=0\iff A(x)=0\ \lor\ B(x)=0.
+\]
+\end{teorema}
+
+Per risolvere un'equazione $P(x)=0$ di grado superiore al secondo si procede così.
+\begin{enumerate}[label=\arabic*)]
+\item Si porta l'equazione nella forma $P(x)=0$.
+\item Si scompone $P(x)$ in fattori (raccoglimenti, prodotti notevoli, regola di Ruffini) e si applica la legge di annullamento del prodotto.
+\item Si risolvono le equazioni di primo e di secondo grado ottenute.
+\end{enumerate}
+
+\begin{definizione}
+Si chiama \emph{equazione biquadratica} un'equazione del tipo $ax^4+bx^2+c=0$, con $a\neq 0$. Si risolve con la sostituzione $t=x^2$, che la riduce all'equazione di secondo grado $at^2+bt+c=0$; sono accettabili solo le soluzioni $t\ge 0$, e da ciascuna si ricavano $x=\pm\sqrt{t}$.
+\end{definizione}
+
+Più in generale, le equazioni \emph{trinomie} $ax^{2n}+bx^n+c=0$ si risolvono con la sostituzione $t=x^n$.
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $x^3-7x+6=0$.
+
+Si osserva che $x=1$ è radice. Con la regola di Ruffini si ottiene $(x-1)(x^2+x-6)=0$ e, scomponendo il trinomio, $(x-1)(x-2)(x+3)=0$. Dunque
+\[
+x=-3\ \lor\ x=1\ \lor\ x=2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^4-13x^2+36=0$.
+
+Con $t=x^2$ si ha $t^2-13t+36=0$, da cui $t=4$ oppure $t=9$. Entrambe sono accettabili ($t\ge 0$), quindi $x^2=4$ oppure $x^2=9$:
+\[
+x=\pm 2\ \lor\ x=\pm 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x^4+x^2-2=0$.
+
+Con $t=x^2$ si ha $t^2+t-2=0$, da cui $t=1$ oppure $t=-2$. La soluzione $t=-2$ non è accettabile perché $x^2\ge 0$; da $x^2=1$ si ricava
+\[
+x=\pm 1.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^3-9x=0$ \hfill $[x=-3,\ 0,\ 3]$
+\item $x^4-16=0$ \hfill $[x=\pm 2]$
+\item $x^3+8=0$ \hfill $[x=-2]$
+\item $x^3-x^2-4x+4=0$ \hfill $[x=-2,\ 1,\ 2]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^4-10x^2+9=0$ \hfill $[x=\pm 1,\ \pm 3]$
+\item $x^4+3x^2-4=0$ \hfill $[x=\pm 1]$
+\item $x^3-2x^2-5x+6=0$ \hfill $[x=-2,\ 1,\ 3]$
+\item $2x^3-3x^2-3x+2=0$ \hfill $[x=-1,\ \tfrac12,\ 2]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x^6-7x^3-8=0$ \hfill $[x=-1,\ 2]$
+\item $x^4-2x^3-x^2+2x=0$ \hfill $[x=-1,\ 0,\ 1,\ 2]$
+\item $x^4+x^2+1=0$ \hfill $[\text{impossibile}]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: equazioni e disequazioni di grado superiore al secondo}
+
+\subsection*{Equazione e disequazione associata}
+
+Data un'espressione polinomiale $P(x)$ scomposta in fattori, le radici dell'equazione $P(x)=0$ sono gli estremi degli intervalli che servono per le disequazioni $P(x)\gtrless 0$. Conviene quindi risolvere \emph{prima} l'equazione e poi, con le stesse radici, studiare il segno del prodotto.
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere l'equazione $x^4-5x^2+4=0$ e la disequazione $x^4-5x^2+4<0$.
+
+\emph{Scomposizione.} Con $t=x^2$ si ha $t^2-5t+4=(t-1)(t-4)$, quindi
+\[
+x^4-5x^2+4=(x^2-1)(x^2-4)=(x-1)(x+1)(x-2)(x+2).
+\]
+
+\emph{Equazione.} Le soluzioni sono $x=\pm 1$ e $x=\pm 2$.
+
+\emph{Disequazione.} Per $x>2$ il prodotto è positivo e il segno si alterna attraversando ciascuna delle radici semplici $-2$, $-1$, $1$, $2$. Il prodotto è negativo per
+\[
+-2<x<-1\ \lor\ 1<x<2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere l'equazione $x^4+x^2-6=0$ e la disequazione $x^4+x^2-6\ge 0$.
+
+\emph{Scomposizione.} Si ha $x^4+x^2-6=(x^2-2)(x^2+3)$. Il fattore $x^2+3$ è sempre positivo.
+
+\emph{Equazione.} Resta $x^2-2=0$, cioè $x=\pm\sqrt{2}$.
+
+\emph{Disequazione.} Equivale a $x^2-2\ge 0$, quindi
+\[
+x\le -\sqrt{2}\ \lor\ x\ge\sqrt{2}.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+Per ciascun polinomio si risolvano l'equazione $P(x)=0$ e la disequazione indicata.
+
+\begin{esercizio}[Livello base]
+\begin{enumerate}[label=\alph*)]
+\item $x^3-4x=0$ \quad e \quad $x^3-4x>0$ \hfill $[x=-2,\ 0,\ 2;\quad -2<x<0\ \lor\ x>2]$
+\item $x^4-81=0$ \quad e \quad $x^4-81<0$ \hfill $[x=\pm 3;\quad -3<x<3]$
+\item $x^3+1=0$ \quad e \quad $x^3+1\ge 0$ \hfill $[x=-1;\quad x\ge -1]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+\begin{enumerate}[label=\alph*)]
+\item $x^3-3x^2-x+3=0$ \quad e \quad $x^3-3x^2-x+3>0$ \hfill $[x=-1,\ 1,\ 3;\quad -1<x<1\ \lor\ x>3]$
+\item $x^4-8x^2-9=0$ \quad e \quad $x^4-8x^2-9\ge 0$ \hfill $[x=\pm 3;\quad x\le -3\ \lor\ x\ge 3]$
+\item $2x^3+x^2-2x-1=0$ \quad e \quad $2x^3+x^2-2x-1\le 0$ \hfill $[x=-1,\ -\tfrac12,\ 1;\quad x\le -1\ \lor\ -\tfrac12\le x\le 1]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+\begin{enumerate}[label=\alph*)]
+\item $x^4-6x^3+9x^2=0$ \quad e \quad $x^4-6x^3+9x^2>0$ \hfill $[x=0,\ 3;\quad x\neq 0\ \land\ x\neq 3]$
+\item $x^4-6x^3+9x^2\le 0$ \hfill $[x=0\ \lor\ x=3]$
+\item $x^6-9x^3+8=0$ \quad e \quad $x^6-9x^3+8<0$ \hfill $[x=1,\ 2;\quad 1<x<2]$
+\item $x^4+4x^2+4=0$ \quad e \quad $x^4+4x^2+4>0$ \hfill $[\text{impossibile};\quad \forall x\in\R]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: disequazioni di grado superiore al secondo e sistemi di disequazioni}
+
+\subsection*{Sistemi di disequazioni}
+
+\begin{definizione}
+Un \emph{sistema di disequazioni} nella stessa incognita $x$ è un insieme di due o più disequazioni da soddisfare contemporaneamente. L'insieme delle soluzioni del sistema è l'\emph{intersezione} degli insiemi delle soluzioni delle singole disequazioni.
+\end{definizione}
+
+Per risolvere un sistema si procede così.
+\begin{enumerate}[label=\arabic*)]
+\item Si risolve ciascuna disequazione separatamente (con la parabola, oppure scomponendo e studiando il segno).
+\item Si rappresentano le soluzioni su rette orizzontali parallele, una per ciascuna disequazione: gli intervalli \emph{in cui la condizione è verificata} si disegnano con linea continua, gli altri tratteggiati; un estremo incluso si indica con un pallino pieno, uno escluso con un pallino vuoto.
+\item Le soluzioni del sistema sono i valori di $x$ in cui \emph{tutte} le rette hanno linea continua. Se non ce ne sono, il sistema è impossibile.
+\end{enumerate}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere il sistema
+\[
+\sistema{x^2-5x+6>0\\ x^3-4x\le 0}
+\]
+
+\emph{Prima disequazione.} $x^2-5x+6=(x-2)(x-3)>0$ per $x<2\ \lor\ x>3$.
+
+\emph{Seconda disequazione.} $x^3-4x=x(x-2)(x+2)\le 0$ per $x\le -2\ \lor\ 0\le x\le 2$.
+
+\emph{Intersezione.} Le soluzioni della seconda sono contenute in $x\le 2$; l'estremo $x=2$ è escluso dalla prima. Le soluzioni del sistema sono
+\[
+x\le -2\ \lor\ 0\le x<2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere il sistema
+\[
+\sistema{x^3-x\ge 0\\ x^2-4<0}
+\]
+
+\emph{Prima disequazione.} $x^3-x=x(x-1)(x+1)\ge 0$ per $-1\le x\le 0\ \lor\ x\ge 1$.
+
+\emph{Seconda disequazione.} $x^2-4<0$ per $-2<x<2$.
+
+\emph{Intersezione.} Si considerano i valori che compaiono in entrambe:
+\[
+-1\le x\le 0\ \lor\ 1\le x<2.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere i seguenti sistemi.
+\begin{enumerate}[label=\alph*)]
+\item $\sistema{x^2-4x+3<0\\ x^3-x>0}$ \hfill $[1<x<3]$
+\item $\sistema{x^3-9x\ge 0\\ x^2<16}$ \hfill $[-3\le x\le 0\ \lor\ 3\le x<4]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere i seguenti sistemi.
+\begin{enumerate}[label=\alph*)]
+\item $\sistema{x^3-3x^2-x+3>0\\ x^2-2x-3<0}$ \hfill $[-1<x<1]$
+\item $\sistema{x^4-5x^2+4\ge 0\\ x^2-x-2<0}$ \hfill $[-1<x\le 1]$
+\item $\sistema{x^3+8>0\\ x^4-16\le 0}$ \hfill $[-2<x\le 2]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere i seguenti sistemi.
+\begin{enumerate}[label=\alph*)]
+\item $\sistema{x^4-6x^3+9x^2>0\\ x^2-x-6\le 0}$ \hfill $[-2\le x<0\ \lor\ 0<x<3]$
+\item $\sistema{x^3-3x+2\le 0\\ x^3-x\ge 0}$ \hfill $[x=1]$
+\end{enumerate}
+\end{esercizio}
+
+\chapter{Equazioni e disequazioni irrazionali}
+
+\section{Le equazioni irrazionali}
+
+\begin{definizione}
+Un'equazione si dice \emph{irrazionale} se l'incognita compare sotto il segno di radice, cioè nel radicando di almeno una radice.
+\end{definizione}
+
+Sono equazioni irrazionali, per esempio,
+\[
+\sqrt{x+2}=x,\qquad \sqrt{2x-1}=\sqrt{x+3},\qquad \sqrt[3]{x^2-1}=2.
+\]
+
+\subsection*{Condizioni di esistenza}
+
+Se una radice ha \emph{indice pari}, il radicando deve essere maggiore o uguale a zero e il valore della radice è sempre maggiore o uguale a zero. Se la radice ha \emph{indice dispari}, non occorre alcuna condizione sul radicando e la radice può assumere qualunque valore reale.
+
+\subsection*{Equazioni equivalenti}
+
+Elevare entrambi i membri di un'equazione a una potenza pari può introdurre soluzioni che non appartengono all'equazione di partenza: per esempio, da $x=2$ elevando al quadrato si ottiene $x^2=4$, che ha anche la soluzione $x=-2$. Per questo occorre accompagnare l'elevamento a potenza con opportune condizioni.
+
+\begin{teorema}
+Siano $A(x)$ e $B(x)$ due espressioni nell'incognita $x$.
+\begin{enumerate}[label=\arabic*)]
+\item \emph{Radice quadrata uguale a un'espressione:}
+\[
+\sqrt{A(x)}=B(x)\iff \sistema{B(x)\ge 0\\ A(x)=\bigl[B(x)\bigr]^2}
+\]
+(la condizione $A(x)\ge 0$ è automaticamente verificata, perché $A(x)$ è uguale a un quadrato).
+\item \emph{Due radici quadrate uguali:}
+\[
+\sqrt{A(x)}=\sqrt{B(x)}\iff \sistema{A(x)\ge 0\\ A(x)=B(x)}
+\]
+(oppure, in modo equivalente, con la condizione $B(x)\ge 0$).
+\item \emph{Radice di indice dispari:} per ogni $n$ dispari
+\[
+\sqrt[n]{A(x)}=B(x)\iff A(x)=\bigl[B(x)\bigr]^n,
+\]
+senza alcuna condizione aggiuntiva.
+\end{enumerate}
+\end{teorema}
+
+\begin{osservazione}
+Nel caso 1) la condizione $B(x)\ge 0$ è detta \emph{condizione di concordanza}: il primo membro è non negativo e quindi lo deve essere anche il secondo. In alternativa si può risolvere l'equazione ottenuta dopo l'elevamento a potenza e \emph{verificare} ciascuna soluzione sostituendola nell'equazione di partenza, scartando quelle non valide.
+\end{osservazione}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\sqrt{x+2}=x$.
+
+Per il teorema l'equazione è equivalente al sistema
+\[
+\sistema{x\ge 0\\ x+2=x^2}
+\]
+La seconda equazione diventa $x^2-x-2=0$, con soluzioni $x=-1$ e $x=2$. La condizione $x\ge 0$ esclude $x=-1$. L'unica soluzione è
+\[
+x=2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{2x-1}=\sqrt{x+3}$.
+
+Si ottiene il sistema
+\[
+\sistema{2x-1\ge 0\\ 2x-1=x+3}
+\]
+dalla seconda equazione si ricava $x=4$, che soddisfa $2x-1=7\ge 0$. Dunque
+\[
+x=4.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt[3]{x^2-1}=2$.
+
+L'indice è dispari, quindi si elevano al cubo entrambi i membri senza condizioni: $x^2-1=8$, cioè $x^2=9$ e
+\[
+x=\pm 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x+7}-1=x$.
+
+Si isola la radice: $\sqrt{x+7}=x+1$. L'equazione è equivalente al sistema
+\[
+\sistema{x+1\ge 0\\ x+7=(x+1)^2}
+\]
+La seconda equazione diventa $x^2+x-6=0$, con soluzioni $x=-3$ e $x=2$. La condizione $x\ge -1$ esclude $x=-3$. Verifica: per $x=2$ si ha $\sqrt{9}-1=2$. L'unica soluzione è
+\[
+x=2.
+\]
+\end{esempio}
+
+\subsection*{Equazioni con più radicali}
+
+Quando compaiono due radici quadrate nella stessa equazione, si isola una radice, si eleva al quadrato (con la condizione che il membro isolato dall'altra parte sia non negativo), e si ripete il procedimento finché non resta alcuna radice.
+
+\begin{esempio}
+Risolvere $\sqrt{x+1}+\sqrt{x-2}=3$.
+
+\emph{Condizioni di esistenza:} $x+1\ge 0$ e $x-2\ge 0$, cioè $x\ge 2$.
+
+\emph{Isolamento.} $\sqrt{x+1}=3-\sqrt{x-2}$, con la condizione $3-\sqrt{x-2}\ge 0$, cioè $x\le 11$.
+
+\emph{Elevamento al quadrato.}
+\[
+x+1=9-6\sqrt{x-2}+x-2\ \Longrightarrow\ 6\sqrt{x-2}=6\ \Longrightarrow\ \sqrt{x-2}=1\ \Longrightarrow\ x=3.
+\]
+Il valore $x=3$ soddisfa $2\le x\le 11$. Verifica: $\sqrt4+\sqrt1=3$. Dunque
+\[
+x=3.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x-1}=3$ \hfill $[x=10]$
+\item $\sqrt{3x+4}=x$ \hfill $[x=4]$
+\item $\sqrt[3]{x+1}=2$ \hfill $[x=7]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+6}=x$ \hfill $[x=3]$
+\item $\sqrt{5-x}=x-1$ \hfill $\bigl[x=\tfrac{1+\sqrt{17}}{2}\bigr]$
+\item $\sqrt{2x+3}=\sqrt{x+5}$ \hfill $[x=2]$
+\item $\sqrt{x^2-3x}=2$ \hfill $[x=-1\ \lor\ x=4]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+5}-\sqrt{x}=1$ \hfill $[x=4]$
+\item $\sqrt{x-3}=x-5$ \hfill $[x=7]$
+\item $\sqrt{x+1}=-2$ \hfill $[\text{impossibile}]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: equazioni irrazionali}
+
+\subsection*{Schema di risoluzione}
+
+\begin{enumerate}[label=\arabic*)]
+\item Si determinano le \emph{condizioni di esistenza} dei radicali di indice pari.
+\item Si isola, se possibile, un radicale a un membro.
+\item Si impone la \emph{condizione di concordanza} (il membro senza radice deve essere $\ge 0$ quando l'altro è una radice di indice pari) e si eleva a potenza.
+\item Si risolve l'equazione ottenuta e si controlla che le soluzioni soddisfino tutte le condizioni (oppure si verificano sostituendole nell'equazione di partenza).
+\end{enumerate}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2+x-2}=x-1$.
+
+L'equazione è equivalente al sistema
+\[
+\sistema{x-1\ge 0\\ x^2+x-2=(x-1)^2}
+\]
+La seconda equazione diventa $x^2+x-2=x^2-2x+1$, cioè $3x=3$ e $x=1$. La soluzione soddisfa $x\ge 1$. Verifica: $\sqrt{0}=0$. Dunque
+\[
+x=1.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{2x+3}-\sqrt{x+1}=1$.
+
+\emph{Condizioni di esistenza:} $2x+3\ge 0$ e $x+1\ge 0$, cioè $x\ge -1$.
+
+\emph{Isolamento.} $\sqrt{2x+3}=1+\sqrt{x+1}$; entrambi i membri sono non negativi, quindi si può elevare al quadrato:
+\[
+2x+3=1+2\sqrt{x+1}+x+1\ \Longrightarrow\ x+1=2\sqrt{x+1}.
+\]
+\emph{Sostituzione.} Posto $u=\sqrt{x+1}\ge 0$ si ottiene $u^2=2u$, cioè $u=0$ oppure $u=2$, da cui $x+1=0$ oppure $x+1=4$.
+
+Entrambi i valori soddisfano $x\ge -1$. Verifica: per $x=-1$ si ha $\sqrt1-\sqrt0=1$; per $x=3$ si ha $\sqrt9-\sqrt4=1$. Dunque
+\[
+x=-1\ \lor\ x=3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $x-5\sqrt{x}+6=0$.
+
+La condizione di esistenza è $x\ge 0$. Posto $t=\sqrt{x}\ge 0$ si ha $x=t^2$ e l'equazione diventa $t^2-5t+6=0$, con soluzioni $t=2$ e $t=3$, entrambe accettabili. Da $\sqrt{x}=2$ e $\sqrt{x}=3$ si ricava
+\[
+x=4\ \lor\ x=9.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{2x+1}=3$ \hfill $[x=4]$
+\item $\sqrt{x^2-9}=4$ \hfill $[x=\pm 5]$
+\item $\sqrt{x+2}=x-4$ \hfill $[x=7]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x^2+3x}=x+1$ \hfill $[x=1]$
+\item $\sqrt{3-x}=\sqrt{x+1}$ \hfill $[x=1]$
+\item $\sqrt[3]{2x+3}=-1$ \hfill $[x=-2]$
+\item $\sqrt{x+3}=x-3$ \hfill $[x=6]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+4}+\sqrt{x-1}=5$ \hfill $[x=5]$
+\item $x-4\sqrt{x}+3=0$ \hfill $[x=1\ \lor\ x=9]$
+\item $\sqrt{x^2-x-2}=x+1$ \hfill $[x=-1]$
+\item $\sqrt{x-2}+\sqrt{1-x}=1$ \hfill $[\text{impossibile}]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: equazioni irrazionali, consolidamento}
+
+\subsection*{Un richiamo utile}
+
+Per ogni espressione $A(x)$ vale $\sqrt{[A(x)]^2}=\abs{A(x)}$ e \emph{non} $A(x)$: la radice quadrata è sempre non negativa. Per questo un'equazione come $\sqrt{[A(x)]^2}=k$, con $k\ge 0$, equivale a $\abs{A(x)}=k$, cioè a $A(x)=\pm k$.
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2-2x+1}=3$.
+
+Poiché $x^2-2x+1=(x-1)^2$, l'equazione è $\abs{x-1}=3$, da cui $x-1=3$ oppure $x-1=-3$:
+\[
+x=4\ \lor\ x=-2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt[3]{x^2-1}=\sqrt[3]{3x+3}$.
+
+L'indice è dispari: non servono condizioni e si possono elevare al cubo entrambi i membri. Si ottiene $x^2-1=3x+3$, cioè $x^2-3x-4=0$ e
+\[
+x=-1\ \lor\ x=4.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x+2}+\sqrt{x-3}=5$.
+
+\emph{Condizioni di esistenza:} $x\ge 3$.
+
+\emph{Isolamento.} $\sqrt{x+2}=5-\sqrt{x-3}$, con $5-\sqrt{x-3}\ge 0$, cioè $x\le 28$. Elevando al quadrato:
+\[
+x+2=25-10\sqrt{x-3}+x-3\ \Longrightarrow\ 10\sqrt{x-3}=20\ \Longrightarrow\ \sqrt{x-3}=2\ \Longrightarrow\ x=7.
+\]
+Il valore $x=7$ soddisfa $3\le x\le 28$. Verifica: $\sqrt9+\sqrt4=5$. Dunque
+\[
+x=7.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{5x-1}=2$ \hfill $[x=1]$
+\item $\sqrt{x^2+16}=5$ \hfill $[x=\pm 3]$
+\item $\sqrt{x-2}=x-8$ \hfill $[x=11]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x^2+6x+9}=5$ \hfill $[x=-8\ \lor\ x=2]$
+\item $\sqrt{2x+1}=x-1$ \hfill $[x=4]$
+\item $\sqrt{x+10}=x-2$ \hfill $[x=6]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+1}+\sqrt{x+6}=5$ \hfill $[x=3]$
+\item $x+\sqrt{x}=2$ \hfill $[x=1]$
+\item $\sqrt{x+2}+3=1$ \hfill $[\text{impossibile}]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Le disequazioni irrazionali}
+
+\begin{definizione}
+Una disequazione si dice \emph{irrazionale} se l'incognita compare sotto il segno di radice.
+\end{definizione}
+
+Come per le equazioni, la radice di \emph{indice pari} richiede che il radicando sia $\ge 0$ e ha sempre valore $\ge 0$; la radice di \emph{indice dispari} non richiede condizioni. A differenza delle equazioni, nelle disequazioni non si può risolvere per verifica: bisogna sempre impostare i sistemi equivalenti.
+
+\subsection*{Radice quadrata e un'espressione}
+
+\begin{teorema}
+Siano $A(x)$ e $B(x)$ due espressioni nell'incognita $x$.
+\begin{enumerate}[label=\arabic*)]
+\item $\displaystyle \sqrt{A}<B\iff \sistema{A\ge 0\\ B>0\\ A<B^2}$
+\item $\displaystyle \sqrt{A}\le B\iff \sistema{A\ge 0\\ B\ge 0\\ A\le B^2}$
+\item $\displaystyle \sqrt{A}>B\iff \sistema{B<0\\ A\ge 0}\ \ \lor\ \ \sistema{B\ge 0\\ A>B^2}$
+\item $\displaystyle \sqrt{A}\ge B\iff \sistema{B<0\\ A\ge 0}\ \ \lor\ \ \sistema{B\ge 0\\ A\ge B^2}$
+\end{enumerate}
+\end{teorema}
+
+Nei casi 1) e 2) il secondo membro deve essere non negativo, perché la radice lo è. Nei casi 3) e 4), se $B<0$ la disequazione è verificata ovunque la radice esiste; se $B\ge 0$ si può elevare al quadrato.
+
+\subsection*{Due radici quadrate}
+
+\begin{teorema}
+\[
+\sqrt{A}<\sqrt{B}\iff \sistema{A\ge 0\\ A<B}\qquad
+\sqrt{A}\le\sqrt{B}\iff \sistema{A\ge 0\\ A\le B}
+\]
+\[
+\sqrt{A}>\sqrt{B}\iff \sistema{B\ge 0\\ A>B}\qquad
+\sqrt{A}\ge\sqrt{B}\iff \sistema{B\ge 0\\ A\ge B}
+\]
+\end{teorema}
+
+\subsection*{Radice di indice dispari}
+
+Per $n$ dispari, la funzione $t\mapsto t^n$ è crescente su tutto $\R$, quindi
+\[
+\sqrt[n]{A}<B\iff A<B^n,\qquad \sqrt[n]{A}>B\iff A>B^n,
+\]
+senza alcuna condizione aggiuntiva (e analogamente con $\le$ e $\ge$).
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\sqrt{x+2}<x$.
+
+Per il caso 1) si ha il sistema
+\[
+\sistema{x+2\ge 0\\ x>0\\ x+2<x^2}
+\]
+La prima condizione dà $x\ge -2$, la seconda $x>0$; la terza diventa $x^2-x-2>0$, cioè $x<-1\ \lor\ x>2$. Dall'intersezione si ricava
+\[
+x>2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2-3x}\le 2$.
+
+Per il caso 2) si ha il sistema
+\[
+\sistema{x^2-3x\ge 0\\ 2\ge 0\\ x^2-3x\le 4}
+\]
+La prima disequazione dà $x\le 0\ \lor\ x\ge 3$, la seconda è sempre vera, la terza diventa $x^2-3x-4\le 0$, cioè $-1\le x\le 4$. L'intersezione è
+\[
+-1\le x\le 0\ \lor\ 3\le x\le 4.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x+1}>x-1$.
+
+Per il caso 3) si considerano due sistemi.
+
+\emph{Primo sistema} ($B<0$):
+\[
+\sistema{x-1<0\\ x+1\ge 0}\quad\Longrightarrow\quad -1\le x<1.
+\]
+\emph{Secondo sistema} ($B\ge 0$):
+\[
+\sistema{x-1\ge 0\\ x+1>(x-1)^2}
+\]
+La seconda disequazione diventa $x^2-3x<0$, cioè $0<x<3$; con $x\ge 1$ si ottiene $1\le x<3$.
+
+L'insieme delle soluzioni è l'unione dei due risultati:
+\[
+-1\le x<3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x-1}<\sqrt{3-x}$.
+
+Si ha il sistema
+\[
+\sistema{x-1\ge 0\\ x-1<3-x}
+\]
+cioè $x\ge 1$ e $x<2$, da cui
+\[
+1\le x<2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt[3]{x-1}>2$.
+
+L'indice è dispari: $x-1>8$, cioè
+\[
+x>9.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x-1}<3$ \hfill $[1\le x<10]$
+\item $\sqrt{2x+1}>3$ \hfill $[x>4]$
+\item $\sqrt{3x+4}\le x$ \hfill $[x\ge 4]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+6}\ge x$ \hfill $[-6\le x\le 3]$
+\item $\sqrt{x^2-x-2}>x$ \hfill $[x\le -1]$
+\item $\sqrt{x+3}<\sqrt{2x+1}$ \hfill $[x>2]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Esercitazione: disequazioni irrazionali}
+
+\subsection*{Schema di risoluzione}
+
+\begin{enumerate}[label=\arabic*)]
+\item Si individua il tipo di disequazione: radice e un'espressione ($\sqrt{A}\gtrless B$), due radici ($\sqrt{A}\gtrless\sqrt{B}$), indice dispari.
+\item Si scrive il sistema (o i sistemi) equivalente, con le condizioni di esistenza e il segno del secondo membro.
+\item Si risolve ciascuna disequazione del sistema e se ne fa l'intersezione; nei casi $\sqrt{A}>B$ e $\sqrt{A}\ge B$ si fa poi l'\emph{unione} dei risultati dei due sistemi.
+\end{enumerate}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2-4}<x$.
+
+Si ha il sistema
+\[
+\sistema{x^2-4\ge 0\\ x>0\\ x^2-4<x^2}
+\]
+La prima condizione dà $x\le -2\ \lor\ x\ge 2$, la seconda $x>0$; la terza si riduce a $-4<0$, sempre vera. L'intersezione è
+\[
+x\ge 2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{2x+3}\ge x$.
+
+Per il caso 4) si considerano due sistemi.
+
+\emph{Primo sistema} ($B<0$):
+\[
+\sistema{x<0\\ 2x+3\ge 0}\quad\Longrightarrow\quad -\tfrac32\le x<0.
+\]
+\emph{Secondo sistema} ($B\ge 0$):
+\[
+\sistema{x\ge 0\\ 2x+3\ge x^2}
+\]
+La seconda disequazione diventa $x^2-2x-3\le 0$, cioè $-1\le x\le 3$; con $x\ge 0$ si ottiene $0\le x\le 3$.
+
+Unendo i due risultati:
+\[
+-\tfrac32\le x\le 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2-3x+2}\le\sqrt{x-1}$.
+
+Si ha il sistema
+\[
+\sistema{x^2-3x+2\ge 0\\ x^2-3x+2\le x-1}
+\]
+La prima disequazione dà $x\le 1\ \lor\ x\ge 2$. La seconda diventa $x^2-4x+3\le 0$, cioè $1\le x\le 3$. L'intersezione è
+\[
+x=1\ \lor\ 2\le x\le 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x^2-4x+4}<3$.
+
+Poiché $x^2-4x+4=(x-2)^2$, la disequazione è $\abs{x-2}<3$, cioè $-3<x-2<3$ e
+\[
+-1<x<5.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x+4}<3$ \hfill $[-4\le x<5]$
+\item $\sqrt{x-2}\ge 1$ \hfill $[x\ge 3]$
+\item $\sqrt{4-x}>2$ \hfill $[x<0]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{2x-1}<x$ \hfill $[\tfrac12\le x<1\ \lor\ x>1]$
+\item $\sqrt{x^2-9}>x$ \hfill $[x\le -3]$
+\item $\sqrt{x+2}\ge x$ \hfill $[-2\le x\le 2]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\sqrt{x^2-4x+3}<\sqrt{3-x}$ \hfill $[0<x\le 1]$
+\item $\sqrt{x^2-4x+4}>3$ \hfill $[x<-1\ \lor\ x>5]$
+\item $\sqrt[3]{x^2-4}\le\sqrt[3]{3x}$ \hfill $[-1\le x\le 4]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Disequazioni irrazionali: casi particolari}
+
+\subsection*{Prodotti e quozienti con radicali}
+
+Quando una disequazione irrazionale ha la forma $F(x)\cdot\sqrt{A(x)}\gtrless 0$ oppure $\dfrac{F(x)}{\sqrt{A(x)}}\gtrless 0$, non occorre elevare al quadrato: si studia il segno dei fattori, ricordando che $\sqrt{A}\ge 0$ dove esiste e che $\sqrt{A}=0$ soltanto quando $A=0$. Nel quoziente, il denominatore richiede $A>0$.
+
+\begin{esempio}
+Risolvere $(x-1)\sqrt{x+3}\ge 0$.
+
+\emph{Condizione di esistenza:} $x\ge -3$.
+
+Per $x=-3$ il prodotto vale $0$ e la disequazione è verificata. Per $x>-3$ la radice è positiva e il prodotto è $\ge 0$ se e solo se $x-1\ge 0$. Dunque
+\[
+x=-3\ \lor\ x\ge 1.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\dfrac{x-2}{\sqrt{x+1}}>0$.
+
+\emph{Condizione di esistenza:} $x+1>0$, cioè $x>-1$. In questo insieme il denominatore è positivo, quindi il segno del quoziente è quello del numeratore: $x-2>0$. Dunque
+\[
+x>2.
+\]
+\end{esempio}
+
+\subsection*{Sostituzione con la radice}
+
+Se compaiono sia $x$ sia $\sqrt{x}$, si pone $t=\sqrt{x}$, con $t\ge 0$ e $x=t^2$. Si risolve la disequazione in $t$ e si torna alla variabile $x$.
+
+\begin{esempio}
+Risolvere $x-3\sqrt{x}+2<0$.
+
+\emph{Condizione di esistenza:} $x\ge 0$. Posto $t=\sqrt{x}\ge 0$ si ha $t^2-3t+2<0$, cioè $1<t<2$, e quindi $1<\sqrt{x}<2$. Elevando al quadrato, tutti i membri sono positivi:
+\[
+1<x<4.
+\]
+\end{esempio}
+
+\subsection*{Due radicali sommati}
+
+Si isola un radicale, si impone che il secondo membro sia positivo, e si eleva al quadrato; il procedimento si ripete finché resta un solo radicale.
+
+\begin{esempio}
+Risolvere $\sqrt{x+1}+\sqrt{x-2}<3$.
+
+\emph{Condizione di esistenza:} $x\ge 2$.
+
+\emph{Isolamento.} $\sqrt{x+1}<3-\sqrt{x-2}$. Il primo membro è $\ge 0$, quindi serve $3-\sqrt{x-2}>0$, cioè $x<11$. Con questa condizione si può elevare al quadrato:
+\[
+x+1<9-6\sqrt{x-2}+x-2\ \Longrightarrow\ 6\sqrt{x-2}<6\ \Longrightarrow\ \sqrt{x-2}<1\ \Longrightarrow\ x<3.
+\]
+Insieme a $x\ge 2$ e $x<11$ si ottiene
+\[
+2\le x<3.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $(x+2)\sqrt{x-1}\le 0$ \hfill $[x=1]$
+\item $\dfrac{x^2-4}{\sqrt{x+3}}<0$ \hfill $[-2<x<2]$
+\item $\sqrt{x}+2>x$ \hfill $[0\le x<4]$
+\item $x+\sqrt{x}>6$ \hfill $[x>4]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $x-5\sqrt{x}+4>0$ \hfill $[0\le x<1\ \lor\ x>16]$
+\item $\sqrt{x+1}+\sqrt{x+6}<5$ \hfill $[-1\le x<3]$
+\end{enumerate}
+\end{esercizio}
+
+\chapter{Il valore assoluto}
+
+\section{Definizione di valore assoluto}
+
+\begin{definizione}
+Il \emph{valore assoluto} (o \emph{modulo}) di un numero reale $a$ è il numero non negativo
+\[
+\abs{a}=\begin{cases} a & \text{se } a\ge 0\\ -a & \text{se } a<0.\end{cases}
+\]
+\end{definizione}
+
+Per esempio $\abs{5}=5$, $\abs{-5}=5$, $\abs{0}=0$. Se $A(x)$ è un'espressione nell'incognita, il valore assoluto $\abs{A(x)}$ si definisce allo stesso modo:
+\[
+\abs{A(x)}=\begin{cases} A(x) & \text{se } A(x)\ge 0\\ -A(x) & \text{se } A(x)<0.\end{cases}
+\]
+
+\subsection*{Interpretazione geometrica}
+
+Sulla retta reale, $\abs{a}$ è la distanza del punto di ascissa $a$ dall'origine; più in generale $\abs{a-b}$ è la distanza tra i punti di ascissa $a$ e $b$.
+
+\subsection*{Proprietà}
+
+\begin{proposizione}
+Per ogni $a,b\in\R$ valgono:
+\begin{enumerate}[label=\arabic*)]
+\item $\abs{a}\ge 0$, e $\abs{a}=0$ se e solo se $a=0$;
+\item $\abs{-a}=\abs{a}$ e $\abs{a}^2=a^2$;
+\item $\abs{ab}=\abs{a}\,\abs{b}$ e, se $b\neq 0$, $\bigl|\tfrac ab\bigr|=\tfrac{\abs{a}}{\abs{b}}$;
+\item $\sqrt{a^2}=\abs{a}$;
+\item $\abs{a+b}\le\abs{a}+\abs{b}$ (disuguaglianza triangolare).
+\end{enumerate}
+\end{proposizione}
+
+\begin{osservazione}
+Non vale in generale $\sqrt{a^2}=a$: per $a=-3$ si ha $\sqrt{(-3)^2}=\sqrt9=3=\abs{-3}$ e non $-3$.
+\end{osservazione}
+
+\begin{esempio}
+Scrivere senza il valore assoluto $\abs{x-2}$.
+
+L'espressione $x-2$ è $\ge 0$ per $x\ge 2$ e negativa per $x<2$. Quindi
+\[
+\abs{x-2}=\begin{cases} x-2 & \text{se } x\ge 2\\ 2-x & \text{se } x<2.\end{cases}
+\]
+\end{esempio}
+
+\section{Equazioni con valori assoluti}
+
+Sia $k$ un numero reale e siano $A(x)$, $B(x)$ due espressioni.
+
+\begin{teorema}
+\begin{enumerate}[label=\arabic*)]
+\item $\abs{A}=k$ con $k>0$ equivale a $A=k\ \lor\ A=-k$; con $k=0$ equivale a $A=0$; con $k<0$ è impossibile.
+\item $\displaystyle \abs{A}=B\iff \sistema{B\ge 0\\ A=B\ \lor\ A=-B}$
+\item $\abs{A}=\abs{B}\iff A=B\ \lor\ A=-B$.
+\end{enumerate}
+\end{teorema}
+
+Quando compaiono più valori assoluti non riconducibili a questi casi, si stabilisce il segno di ciascun argomento: i valori in cui un argomento si annulla dividono la retta in intervalli e, in ciascuno, si riscrive l'equazione senza valori assoluti. Si accettano solo le soluzioni appartenenti all'intervallo considerato.
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\abs{2x-3}=5$.
+
+Per il caso 1) si ha $2x-3=5$ oppure $2x-3=-5$, cioè
+\[
+x=4\ \lor\ x=-1.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x-2}=3x$.
+
+Per il caso 2) la condizione è $3x\ge 0$, cioè $x\ge 0$. Le equazioni sono:
+\begin{itemize}
+\item $x-2=3x$, da cui $x=-1$, che non soddisfa $x\ge 0$;
+\item $x-2=-3x$, da cui $x=\tfrac12$, che soddisfa $x\ge 0$.
+\end{itemize}
+Dunque
+\[
+x=\tfrac12.
+\]
+Verifica: $\abs{\tfrac12-2}=\tfrac32=3\cdot\tfrac12$.
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x^2-3}=\abs{2x}$.
+
+Per il caso 3) si ha $x^2-3=2x$ oppure $x^2-3=-2x$. La prima, $x^2-2x-3=0$, ha soluzioni $x=-1$ e $x=3$; la seconda, $x^2+2x-3=0$, ha soluzioni $x=-3$ e $x=1$. Dunque
+\[
+x=-3\ \lor\ x=-1\ \lor\ x=1\ \lor\ x=3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x^2-4}=x+2$.
+
+La condizione è $x+2\ge 0$, cioè $x\ge -2$. Le equazioni sono:
+\begin{itemize}
+\item $x^2-4=x+2$, cioè $x^2-x-6=0$, con $x=-2$ e $x=3$, entrambe accettabili;
+\item $x^2-4=-(x+2)$, cioè $x^2+x-2=0$, con $x=-2$ e $x=1$, entrambe accettabili.
+\end{itemize}
+Dunque
+\[
+x=-2\ \lor\ x=1\ \lor\ x=3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x-1}+\abs{x+2}=5$.
+
+Gli argomenti si annullano in $x=1$ e $x=-2$. Si considerano tre intervalli.
+\begin{itemize}
+\item $x<-2$: l'equazione è $-(x-1)-(x+2)=5$, cioè $-2x-1=5$, da cui $x=-3$, accettabile perché $-3<-2$.
+\item $-2\le x<1$: l'equazione è $-(x-1)+(x+2)=5$, cioè $3=5$, impossibile.
+\item $x\ge 1$: l'equazione è $(x-1)+(x+2)=5$, cioè $2x+1=5$, da cui $x=2$, accettabile perché $2\ge 1$.
+\end{itemize}
+Dunque
+\[
+x=-3\ \lor\ x=2.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x-3}=4$ \hfill $[x=-1\ \lor\ x=7]$
+\item $\abs{2x+1}=7$ \hfill $[x=-4\ \lor\ x=3]$
+\item $\abs{x}=-2$ \hfill $[\text{impossibile}]$
+\item $\abs{3x-6}=0$ \hfill $[x=2]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x+4}=2x+1$ \hfill $[x=3]$
+\item $\abs{x^2-1}=3$ \hfill $[x=\pm 2]$
+\item $\abs{x-1}=\abs{2x+3}$ \hfill $[x=-4\ \lor\ x=-\tfrac23]$
+\item $\abs{x^2-2x}=x$ \hfill $[x=0\ \lor\ x=1\ \lor\ x=3]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x}+\abs{x-3}=5$ \hfill $[x=-1\ \lor\ x=4]$
+\item $\abs{x-2}-\abs{x+1}=1$ \hfill $[x=0]$
+\item $\bigl|\abs{x-1}-2\bigr|=1$ \hfill $[x=-2\ \lor\ x=0\ \lor\ x=2\ \lor\ x=4]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Equazioni con più valori assoluti}
+
+Quando in un'equazione compaiono più valori assoluti, non si può applicare direttamente il teorema della sezione precedente. Si procede studiando il segno di ogni argomento.
+
+\paragraph{Procedimento.}
+\begin{enumerate}[label=\arabic*)]
+\item Si determinano i valori di $x$ in cui ciascun argomento si annulla (\emph{punti critici}).
+\item I punti critici dividono la retta in intervalli. In ogni intervallo ciascun argomento ha segno costante, quindi si può togliere il valore assoluto: lo si lascia invariato dove l'argomento è $\ge 0$ e lo si cambia di segno dove è $<0$.
+\item In ogni intervallo si risolve l'equazione senza valori assoluti che si ottiene e si accettano \emph{solo} le soluzioni che appartengono a quell'intervallo.
+\item L'insieme delle soluzioni è l'unione delle soluzioni accettate nei diversi intervalli.
+\end{enumerate}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\abs{x-1}+\abs{x-3}=4$.
+
+I punti critici sono $x=1$ e $x=3$.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|ccccc}
+ & & $1$ & & $3$ & \\
+\hline
+$x-1\ge 0$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-3\ge 0$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item $x<1$: $-(x-1)-(x-3)=4$, cioè $-2x+4=4$, da cui $x=0$, accettabile perché $0<1$.
+\item $1\le x<3$: $(x-1)-(x-3)=4$, cioè $2=4$, impossibile.
+\item $x\ge 3$: $(x-1)+(x-3)=4$, cioè $2x-4=4$, da cui $x=4$, accettabile perché $4\ge 3$.
+\end{itemize}
+Dunque
+\[
+x=0\ \lor\ x=4.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x+1}-2\abs{x-2}=1$.
+
+I punti critici sono $x=-1$ e $x=2$.
+\begin{itemize}
+\item $x<-1$: $-(x+1)+2(x-2)=1$, cioè $x-5=1$, da cui $x=6$, \emph{non} accettabile perché $6\not<-1$.
+\item $-1\le x<2$: $(x+1)+2(x-2)=1$, cioè $3x-3=1$, da cui $x=\tfrac43$, accettabile.
+\item $x\ge 2$: $(x+1)-2(x-2)=1$, cioè $-x+5=1$, da cui $x=4$, accettabile.
+\end{itemize}
+Dunque
+\[
+x=\tfrac43\ \lor\ x=4.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x-1}+\abs{x-3}=2$.
+
+I punti critici sono $1$ e $3$.
+\begin{itemize}
+\item $x<1$: $-(x-1)-(x-3)=2$, cioè $-2x+4=2$, da cui $x=1$, non accettabile perché $1\not<1$.
+\item $1\le x<3$: $(x-1)-(x-3)=2$, cioè $2=2$, identità: tutti i valori dell'intervallo sono soluzioni.
+\item $x\ge 3$: $(x-1)+(x-3)=2$, cioè $2x-4=2$, da cui $x=3$, accettabile.
+\end{itemize}
+Dunque l'insieme delle soluzioni è l'intervallo
+\[
+1\le x\le 3.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x}+\abs{x-1}+\abs{x-2}=4$.
+
+I punti critici sono $0$, $1$, $2$.
+\begin{itemize}
+\item $x<0$: $-x-(x-1)-(x-2)=4$, cioè $-3x+3=4$, da cui $x=-\tfrac13$, accettabile.
+\item $0\le x<1$: $x-(x-1)-(x-2)=4$, cioè $-x+3=4$, da cui $x=-1$, non accettabile.
+\item $1\le x<2$: $x+(x-1)-(x-2)=4$, cioè $x+1=4$, da cui $x=3$, non accettabile.
+\item $x\ge 2$: $x+(x-1)+(x-2)=4$, cioè $3x-3=4$, da cui $x=\tfrac73$, accettabile.
+\end{itemize}
+Dunque
+\[
+x=-\tfrac13\ \lor\ x=\tfrac73.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x}+\abs{x+2}=4$ \hfill $[x=-3\ \lor\ x=1]$
+\item $\abs{x-2}+\abs{x+3}=5$ \hfill $[-3\le x\le 2]$
+\item $\abs{x-1}+\abs{x+1}=1$ \hfill $[\text{impossibile}]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{2x-1}+\abs{x}=3$ \hfill $[x=-\tfrac23\ \lor\ x=\tfrac43]$
+\item $\abs{x-3}=\abs{x+1}+2$ \hfill $[x=0]$
+\item $\abs{x+2}+\abs{x-4}=2x$ \hfill $[x=3]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello avanzato]
+Risolvere le seguenti equazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x-1}+2\abs{x+1}=6$ \hfill $[x=-\tfrac73\ \lor\ x=\tfrac53]$
+\item $\abs{x}+\abs{x-1}+\abs{x-2}=2$ \hfill $[x=1]$
+\item $\abs{x^2-1}+\abs{x}=1$ \hfill $[x=-1\ \lor\ x=0\ \lor\ x=1]$
+\end{enumerate}
+\end{esercizio}
+
+\section{Disequazioni con valori assoluti}
+
+Siano $A(x)$ e $B(x)$ due espressioni nell'incognita $x$ e $k$ un numero reale.
+
+\begin{teorema}
+\begin{enumerate}[label=\arabic*)]
+\item Per $k>0$: $\ \abs{A}<k\iff -k<A<k$ \quad e \quad $\abs{A}>k\iff A<-k\ \lor\ A>k$.
+\item $\abs{A}<B\iff \sistema{A<B\\ A>-B}$ \quad e \quad $\abs{A}\le B\iff \sistema{A\le B\\ A\ge -B}$.
+\item $\abs{A}>B\iff A<-B\ \lor\ A>B$ \quad e \quad $\abs{A}\ge B\iff A\le -B\ \lor\ A\ge B$.
+\item $\abs{A}<\abs{B}\iff A^2<B^2\iff (A-B)(A+B)<0$ \quad (analogamente con $\le$, $>$, $\ge$).
+\end{enumerate}
+\end{teorema}
+
+\begin{osservazione}
+Per $k<0$ la disequazione $\abs{A}<k$ è impossibile, mentre $\abs{A}>k$ è verificata in tutto l'insieme in cui $A$ è definita. Per $k=0$: $\abs{A}\le 0$ equivale a $A=0$ e $\abs{A}>0$ equivale a $A\neq 0$. Le formule 2) e 3) valgono per qualunque segno di $B$: se $B<0$ il sistema 2) è impossibile e la 3) è sempre verificata.
+\end{osservazione}
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\abs{2x-1}<3$.
+
+Equivale a $-3<2x-1<3$, cioè $-2<2x<4$ e
+\[
+-1<x<2.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x^2-4}\ge 3$.
+
+Equivale a $x^2-4\le -3\ \lor\ x^2-4\ge 3$, cioè $x^2\le 1\ \lor\ x^2\ge 7$. Dunque
+\[
+x\le -\sqrt7\ \lor\ -1\le x\le 1\ \lor\ x\ge\sqrt7.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x-1}>2x$.
+
+Per il caso 3) la disequazione equivale a $x-1<-2x\ \lor\ x-1>2x$. La prima dà $x<\tfrac13$, la seconda $x<-1$. L'unione è
+\[
+x<\tfrac13.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x-3}\le\abs{x+1}$.
+
+Poiché entrambi i membri sono non negativi, si può elevare al quadrato: $(x-3)^2\le(x+1)^2$, cioè $x^2-6x+9\le x^2+2x+1$, da cui $-8x\le -8$ e
+\[
+x\ge 1.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\abs{x}+\abs{x-2}<4$.
+
+I punti critici sono $0$ e $2$.
+\begin{itemize}
+\item $x<0$: $-x-(x-2)<4$, cioè $-2x+2<4$, da cui $x>-1$; con $x<0$ si ha $-1<x<0$.
+\item $0\le x<2$: $x-(x-2)<4$, cioè $2<4$, sempre vera: tutto l'intervallo $0\le x<2$.
+\item $x\ge 2$: $x+(x-2)<4$, cioè $2x<6$, da cui $x<3$; con $x\ge 2$ si ha $2\le x<3$.
+\end{itemize}
+L'unione degli intervalli è
+\[
+-1<x<3.
+\]
+\end{esempio}
+
+\section{Equazioni e disequazioni con valori assoluti e irrazionali}
+
+Quando compaiono sia valori assoluti sia radici quadrate conviene ricordare che entrambi sono non negativi: in un confronto tra le due espressioni si può elevare al quadrato senza condizioni aggiuntive, a patto di rispettare le condizioni di esistenza dei radicali. Inoltre $\sqrt{A^2}=\abs{A}$.
+
+\subsection*{Esercizi svolti}
+
+\begin{esempio}
+Risolvere $\abs{x-2}=\sqrt{x+4}$.
+
+\emph{Condizione di esistenza:} $x\ge -4$. Entrambi i membri sono non negativi, quindi l'equazione equivale a $(x-2)^2=x+4$, cioè $x^2-5x=0$, con $x=0$ oppure $x=5$, entrambe soddisfacenti $x\ge -4$. Verifica: $\abs{-2}=2=\sqrt4$ e $\abs{3}=3=\sqrt9$. Dunque
+\[
+x=0\ \lor\ x=5.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{x+4}>\abs{x-2}$.
+
+\emph{Condizione di esistenza:} $x\ge -4$. Con entrambi i membri non negativi si può elevare al quadrato: $x+4>(x-2)^2$, cioè $x^2-5x<0$, da cui $0<x<5$, valori che soddisfano $x\ge -4$. Dunque
+\[
+0<x<5.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{\abs{x}-1}=2$.
+
+\emph{Condizione di esistenza:} $\abs{x}-1\ge 0$, cioè $\abs{x}\ge 1$. Elevando al quadrato: $\abs{x}-1=4$, cioè $\abs{x}=5$, che soddisfa la condizione. Dunque
+\[
+x=\pm 5.
+\]
+\end{esempio}
+
+\begin{esempio}
+Risolvere $\sqrt{\abs{x}-2}<1$.
+
+\emph{Condizione di esistenza:} $\abs{x}\ge 2$. Elevando al quadrato: $\abs{x}-2<1$, cioè $\abs{x}<3$. Il sistema $\sistema{\abs{x}\ge 2\\ \abs{x}<3}$ dà $2\le\abs{x}<3$, cioè
+\[
+-3<x\le -2\ \lor\ 2\le x<3.
+\]
+\end{esempio}
+
+\subsection*{Esercizi proposti}
+
+\begin{esercizio}[Livello base]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x+3}\le 5$ \hfill $[-8\le x\le 2]$
+\item $\abs{3x-2}>4$ \hfill $[x<-\tfrac23\ \lor\ x>2]$
+\item $\abs{2x-3}\le x$ \hfill $[1\le x\le 3]$
+\item $\abs{x-2}<\abs{x}$ \hfill $[x>1]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Livello intermedio]
+Risolvere le seguenti disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x^2-3x}<2$ \hfill $\bigl[\tfrac{3-\sqrt{17}}{2}<x<1\ \lor\ 2<x<\tfrac{3+\sqrt{17}}{2}\bigr]$
+\item $\abs{x}+\abs{x+1}\ge 3$ \hfill $[x\le -2\ \lor\ x\ge 1]$
+\item $\abs{x-1}+\abs{x-4}\le 5$ \hfill $[0\le x\le 5]$
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Valori assoluti e radicali]
+Risolvere le seguenti equazioni e disequazioni.
+\begin{enumerate}[label=\alph*)]
+\item $\abs{x-1}=\sqrt{x+5}$ \hfill $[x=-1\ \lor\ x=4]$
+\item $\sqrt{x+6}\ge\abs{x}$ \hfill $[-2\le x\le 3]$
+\end{enumerate}
+\end{esercizio}
+
+\end{document}
