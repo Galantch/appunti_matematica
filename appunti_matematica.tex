@@ -525,6 +525,278 @@ Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sv
 Se in un'equazione compare più di un radicale si procede nel seguente modo:
 \begin{enumerate}
     \item Si determina il dominio dell'equazione ponendo ogni radicando non negativo e ogni denominatore non nullo;
-    \item Si elevano entrambi i membri all'indice comune dei radicali che vi compaiono.
+    \item Dopo aver fatto in modo che vi siano solo somme, si elevano entrambi i membri all'indice comune dei radicali che vi compaiono.
 \end{enumerate}
+Esempio: $\sqrt{x}-\sqrt{x-5}=-\sqrt{x-3}$
+
+Condizioni di esistenza:$\begin{cases}
+    x\geq0\\
+    x+5\geq0\\
+    x-3\geq0
+\end{cases}\implies x\geq3$
+
+$\begin{array}{l}
+    \sqrt{x}+\sqrt{x-3}=\sqrt{x+5}\\
+    \left(\sqrt{x}+\sqrt{x-3}\right)^2=\left(\sqrt{x+5}\right)^2\\
+    x+x-3+2\sqrt{x^2-3x}=x+5\\
+    2\sqrt{x^2-3x}=8-x\\
+    \begin{cases}
+        8-x\geq0\\
+        4(x^2-3x)=(8-x)^2
+    \end{cases}\\
+    x=-\dfrac{16}{3}\lor x=4\\
+    \begin{cases}
+        x\geq3\\
+        x=-\dfrac{16}{3}\lor x=4
+    \end{cases} \implies x=4
+\end{array}$
+\newpage
+Per risolvere disequazioni irrazionali nella forma $\sqrt[n]{A(x)}<B(x)$ con $n$ pari si riconducono al seguente metodo:
+\begin{equation}
+    \sqrt[n]{A(x)}<B(x)\iff\begin{cases}
+        A(x)\geq0\\
+        B(x)>0\\
+        A(x)<B^n(x)
+    \end{cases}
+\end{equation}
+In caso venisse presa in considerazione anche l'uguaglianza si ricorre al seguente metodo:
+\begin{equation}
+    \sqrt[n]{A(x)}\leq B(x)\iff\begin{cases}
+        A(x)\geq0\\
+        B(x)\geq0\\
+        A(x)\leq B^n(x)
+    \end{cases}
+\end{equation}
+Esempio: $\sqrt{x}<x-2$
+
+$\begin{array}{l}
+   \begin{cases}
+       x\geq0\\
+       x-2>0\\
+       x<(x-2)^2
+   \end{cases}\implies\begin{cases}
+       x\geq0\\
+       x>2\\
+       x<1\lor x>4
+   \end{cases}
+\end{array}$
+
+\begin{tikzpicture}[x=0.5cm,y=0.5cm,font=\footnotesize,
+  open/.style={draw,fill=white,circle,inner sep=0pt,minimum size=4pt},
+  closed/.style={draw,fill=black,circle,inner sep=0pt,minimum size=4pt}]
+
+  % Posizioni dei valori
+  \def\xa{3}     % x = 0
+  \def\xb{7}     % x = 1
+  \def\xc{11}    % x = 2
+  \def\xd{15}    % x = 4
+  \def\xe{19}    % fine delle linee
+
+  % Zona evidenziata
+  \fill[gray!20] (\xd,0) rectangle (\xe,-7);
+
+  % Asse x
+  \draw[-{Stealth[length=2mm]}, thick] (-0.5,0) -- (20,0) node[below left] {$x$};
+
+  % Etichette sopra l'asse
+  \node[above] at (\xa,0.15) {$0$};
+  \node[above] at (\xb,0.15) {$1$};
+  \node[above] at (\xc,0.15) {$2$};
+  \node[above] at (\xd,0.15) {$4$};
+
+  % Barre verticali
+  \foreach \x in {\xa,\xb,\xc,\xd}
+    \draw[very thick] (\x,0.2) -- (\x,-7);
+
+  % Riga 1: x >= 0
+  \draw[thick,dashed] (-0.5,-2) -- (\xa,-2);
+  \draw[thick]        (\xa,-2) -- (\xe,-2);
+  \node[closed] at (\xa,-2) {};
+
+  % Riga 2: x > 2 (2 escluso)
+  \draw[thick,dashed] (-0.5,-4) -- (\xc,-4);
+  \draw[thick]        (\xc,-4) -- (\xe,-4);
+  \node[open] at (\xc,-4) {};
+
+  % Riga 3: x < 1 oppure x > 4
+  \draw[thick]        (-0.5,-6) -- (\xb,-6);
+  \draw[thick,dashed] (\xb,-6) -- (\xd,-6);
+  \draw[thick]        (\xd,-6) -- (\xe,-6);
+  \node[open] at (\xb,-6) {};
+  \node[open] at (\xd,-6) {};
+
+\end{tikzpicture}$\implies x>4$
+
+Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sveltire i calcoli:
+\begin{enumerate}
+    \item $\sqrt{A(x)}<k$, con $k<0$: $\nexists x\in\R$
+    \item $\sqrt{A(x)}\leq k$, con $k=0$: $\sqrt{A(x)}=0$
+    \item $\sqrt{A(x)}<k$, con $k>0$: $\begin{cases}
+        A(x)\geq0\\
+        A(x)<k^2
+    \end{cases}$
+\end{enumerate}
+Per risolvere disequazioni irrazionali nella forma $\sqrt[n]{A(x)}>B(x)$ con $n$ pari si riconducono al seguente metodo:
+\begin{equation}
+    \sqrt[n]{A(x)}>B(x)\iff\begin{cases}
+        B(x)<0\\
+        A(x)\geq0
+    \end{cases}\cup\begin{cases}
+        B(x)\geq0\\
+        A(x)>B^n(x)
+    \end{cases}
+\end{equation}
+In caso venisse presa in considerazione anche l'uguaglianza si ricorre al seguente metodo:
+\begin{equation}
+    \sqrt[n]{A(x)}\geq B(x)\iff\begin{cases}
+        B(x)<0\\
+        A(x)\geq0
+    \end{cases}\cup\begin{cases}
+        B(x)\geq0\\
+        A(x)\geq B^n(x)
+    \end{cases}
+\end{equation}
+Esempio: $\sqrt{9-x^2}>x+3$
+
+$\begin{array}{l}
+   \begin{cases}
+        x+3<0\\
+        9-x^2\geq0 
+   \end{cases}\cup\begin{cases}
+       x+3\geq0\\
+       9-x^2<(x+3)^2
+   \end{cases}\\
+   \begin{cases}
+       x<-3\\
+       -3\leq x\leq3
+   \end{cases}\cup\begin{cases}
+       x\geq-3\\
+       -3<x<0
+   \end{cases}
+\end{array}$
+
+\begin{tikzpicture}[x=0.5cm,y=0.5cm,font=\footnotesize,
+  open/.style={draw,fill=white,circle,inner sep=0pt,minimum size=4pt},
+  closed/.style={draw,fill=black,circle,inner sep=0pt,minimum size=4pt}]
+
+  %%%%%%%%%%%%%%%%%%%%%% PRIMO SISTEMA %%%%%%%%%%%%%%%%%%%%%%
+  \begin{scope}
+    \def\xa{3}     % x = -3
+    \def\xb{7}     % x = 3
+
+    % Asse x
+    \draw[-{Stealth[length=2mm]}, thick] (-0.5,0) -- (9.5,0) node[below left] {$x$};
+
+    % Etichette
+    \node[above] at (\xa,0.15) {$-3$};
+    \node[above] at (\xb,0.15) {$3$};
+
+    % Barre verticali
+    \foreach \x in {\xa,\xb}
+      \draw[very thick] (\x,0.2) -- (\x,-5);
+
+    % Riga 1: -3 <= x <= 3
+    \draw[thick,dashed] (-0.5,-2) -- (\xa,-2);
+    \draw[thick]        (\xa,-2) -- (\xb,-2);
+    \draw[thick,dashed] (\xb,-2) -- (9,-2);
+    \node[closed] at (\xa,-2) {};
+    \node[closed] at (\xb,-2) {};
+
+    % Riga 2: x < -3 oppure x > 3
+    \draw[thick]        (-0.5,-4) -- (\xa,-4);
+    \draw[thick,dashed] (\xa,-4) -- (\xb,-4);
+    \draw[thick]        (\xb,-4) -- (9,-4);
+    \node[open] at (\xa,-4) {};
+    \node[open] at (\xb,-4) {};
+
+    % Etichetta
+    \node at (4.25,-6.5) {Primo sistema};
+  \end{scope}
+
+  %%%%%%%%%%%%%%%%%%%%%% SECONDO SISTEMA %%%%%%%%%%%%%%%%%%%%%%
+  \begin{scope}[xshift=7cm]
+    \def\xa{3}     % x = -3
+    \def\xb{7}     % x = 0
+
+    % Zona evidenziata
+    \fill[gray!20] (\xa,0) rectangle (\xb,-5);
+
+    % Asse x
+    \draw[-{Stealth[length=2mm]}, thick] (-0.5,0) -- (9.5,0) node[below left] {$x$};
+
+    % Etichette
+    \node[above] at (\xa,0.15) {$-3$};
+    \node[above] at (\xb,0.15) {$0$};
+
+    % Barre verticali
+    \foreach \x in {\xa,\xb}
+      \draw[very thick] (\x,0.2) -- (\x,-5);
+
+    % Riga 1: x > -3
+    \draw[thick,dashed] (-0.5,-2) -- (\xa,-2);
+    \draw[thick]        (\xa,-2) -- (9,-2);
+    \node[closed] at (\xa,-2) {};
+
+    % Riga 2: -3 < x < 0 (estremi esclusi)
+    \draw[thick,dashed] (-0.5,-4) -- (\xa,-4);
+    \draw[thick]        (\xa,-4) -- (\xb,-4);
+    \draw[thick,dashed] (\xb,-4) -- (9,-4);
+    \node[open] at (\xa,-4) {};
+    \node[open] at (\xb,-4) {};
+
+    % Etichetta
+    \node at (4.25,-6.5) {Secondo sistema};
+  \end{scope}
+
+\end{tikzpicture}
+
+$\implies3<x<0$
+
+Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sveltire i calcoli:
+\begin{enumerate}
+    \item $\sqrt{A(x)}>k$, con $k<0$: $A(x)\geq0$
+    \item $\sqrt{A(x)}>k$, con $k=0$: $A(x)>0$
+    \item $\sqrt{A(x)}>k$, con $k>0$: $A(x)>k^2$
+\end{enumerate}
+In caso il segno di radice compaia in più di un radicale occorre procedere nello stesso modo delle equazioni.
+\newpage
+\section{Equazioni e disequazioni con valori assoluti}
+\begin{definizione}
+    Dato $x\in \R$, si chiama valore assoluto di $x$, e si indica con il simbolo $|x|$, il numero reale così definito:
+    \begin{equation}
+        |x|=\begin{cases}
+            x&\text{se }x\geq0\\
+            -x&\text{se }x<0
+        \end{cases}
+    \end{equation}
+\end{definizione}
+\begin{definizione}
+    Data un'espressione algebrica $f(x)$, si chiama valore assoluto di $f(x)$, e si indica con il simbolo $|f(x)|$, l'espressione così definita:
+    \begin{equation}
+        |f(x)|=\begin{cases}
+            f(x)&\text{se }f(x)\geq0\\
+            -f(x)&\text{se }f(x)<0
+        \end{cases}
+    \end{equation}
+\end{definizione}
+Di seguito sono elencate le principali proprietà del valore assoluto:
+\begin{enumerate}
+    \item $|-x|=|x|\quad \forall x\in\R$
+    \item $|x|^2=x^2\quad \forall x\in\R$
+    \item $\sqrt{x^2}=|x|\quad \forall x\in\R$
+    \item $|x+y|\leq|x|+|y|\quad\forall x,y\in\R$
+    \item $|xy|=|x||y|\quad\forall x,y\in\R$
+    \item $\left|\dfrac{x}{y}\right|=\dfrac{|x|}{|y|}\quad\forall x,y\in\R\land y\ne0$
+    \item $|x|=|y|\iff x=\pm y\quad\forall x,y\in\R$
+\end{enumerate}
+Per risolvere equazioni del tipo $|A(x)|=B(x)$ si ricorre al seguente metodo:
+\begin{equation}
+    |A(x)|=B(x)\iff\begin{cases}
+        A(x)\geq0\\
+        A(x)=B(x)
+    \end{cases}\cup\begin{cases}
+        A(x)<0\\
+        -A(x)=B(x)
+    \end{cases}
+\end{equation}
 \end{document}
