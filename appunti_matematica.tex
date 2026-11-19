@@ -827,4 +827,154 @@ Per risolvere equazioni del tipo $|A(x)|\lessgtr|B(x)|$ si sfrutta la $2^a$ prop
     |A(x)|\lessgtr|B(x)|\iff A^2(x)=B^2(x)
 \end{equation}
 Se invece compare più di un modulo bisogna ricondursi allo stesso metodo delle equazioni con più moduli.
+\newpage
+\section{Funzioni}
+\subsection{Introduzione alle funzioni}
+\begin{definizione}
+    Siano $X$ e $Y$ due insiemi; si dice funzione da $X$ a $Y$ una relazione che associa a ogni elemento di $X$ un solo elemento di $Y$.
+\end{definizione}
+L'insieme di partenza $X$ si chiama dominio, mentre l'insieme di arrivo $Y$ si chiama codominio. Una funzione $f$ con dominio $X$ e codominio $Y$ si definisce tramite la scrittura $f:X\to Y$. L'immagine di un elemento $x$, l'elemento nel codominio che tramite $f$ corrisponde a $x$, viene indicata con $f(x)$. Simmetricamente si può dire che $x$ è la controimmagine di $y$, se $y$ è l'immagine di $x$. L'insieme immagine di una funzione viene indicato con $f(X)$.
+
+Le funzioni reali di variabile reale si possono indicare tramite un'equazione del tipo:
+\begin{equation}
+    y=f(x)
+\end{equation}
+dove $f(x)$ è l'espressione analitica della funzione, oppure mediante la seguente scrittura:
+\begin{equation}
+    f(x)=\dots
+\end{equation}
+dove al posto dei puntini c'è l'espressione analitica della funzione.
+
+ESEMPIO 1: $f:\R\to\R_0^+$, funzione che associa a ogni numero reale in suo quadrato, può essere definita in una delle seguenti forme:
+
+$y=x^2\quad f(x)=x^2$
+
+ESEMPIO 2: $f:\R\to\R$, funzione che associa a ogni numero reale sé stesso, detta funzione identità, può essere definita in una delle seguenti forme:
+
+$y=x\quad f(x)=x$
+
+In un'equazione $y=f(x)$, $x$ è la variabile indipendente e $y$ la variabile dipendente da $x$.
+
+Di seguito è riportata la suddivisione delle funzione reali di variabile reale:
+\begin{enumerate}
+    \item Algebriche
+    \begin{enumerate}
+        \item Intere
+        \begin{enumerate}
+            \item Razionali, es: $y=x^4-x^2$
+            \item Irrazionali, es: $y=\sqrt{x^2+3x}$
+        \end{enumerate}
+        \item Frazionarie
+        \begin{enumerate}
+            \item Razionali, es: $y=\dfrac{1}{x^4-x^2}$
+            \item Irrazionali, es: $y=\dfrac{1}{\sqrt[3]{x+1}}$
+        \end{enumerate}
+    \end{enumerate}
+    \item Trascendenti, es: $y=x\cdot 6^x$
+\end{enumerate}
+Per calcolare il dominio di una funzione reale di variabile reale bisogna porre ogni denominatore diverso da $0$ e ogni radicando, di radicale con indice pari, maggiore o uguale a $0$.
+
+ESEMPIO 1: $y=x^4-x^2$
+
+Non ci sono né denominatori né radicali con indici pari, quindi il dominio della funzione è $\R$.
+
+ESEMPIO 2: $y=\dfrac{\sqrt{x-2}}{x^2+x+1}$
+
+Bisogna porre $x-2\geq0$ e $x^2+x+1\ne0$ contemporaneamente ricorrendo quindi a un sistema:
+
+$\begin{cases}
+    x-2\geq0\\
+    x^2+x+1\ne0
+\end{cases}\implies x\geq2$
+
+Quindi il dominio della funzione è l'intervallo $[2,+\infty)$.
+
+Il grafico di una funzione $f:X\to Y$ è l'insieme $\set{x,f(x):\text{t.c. }x\in X}$.
+
+Per capire se un grafico è un grafico di una funzione bisogna tracciare delle rette parallele all'asse $y$. Se almeno una retta interseca più di un punto sul grafico allora il grafico non rappresenta una funzione.
+\newpage
+ESEMPIO 1: Grafico di una funzione
+
+\begin{center}
+\begin{tikzpicture}[scale=0.6, >=Stealth]
+
+  % Assi
+  \draw[->] (-2.2,0) -- (4.6,0) node[below] {$x$};
+  \draw[->] (0,-2.8) -- (0,3.6) node[left] {$y$};
+  \node[above left] at (0,0) {$O$};
+
+  % Curva: f(x) = x^2 (x-3) / 2
+  \begin{scope}
+    \clip (-2.1,-2.7) rectangle (4.5,3.5);
+    \draw[thick, smooth, samples=100, domain=-1.5:4.5]
+      plot (\x, {0.5*\x*\x*(\x-3)});
+  \end{scope}
+
+  % Rette verticali tratteggiate in x = -1, 1, 2
+  \foreach \a in {-1,1,2}{
+    \draw[dashed] (\a,-2.8) -- (\a,3.6);
+  }
+
+  % Punti sulla curva
+  \foreach \a in {-1,1,2}{
+    \fill (\a, {0.5*\a*\a*(\a-3)}) circle (2pt);
+  }
+
+\end{tikzpicture}
+\end{center}
+ESEMPIO 2: Non un grafico di una funzione
+
+\begin{center}
+\begin{tikzpicture}[scale=0.6, >=Stealth]
+
+  % Assi
+  \draw[->] (-4.2,0) -- (4.6,0) node[below] {$x$};
+  \draw[->] (0,-4.2) -- (0,4.4) node[left] {$y$};
+  \node[below left, inner sep=2pt] at (0,0) {$O$};
+
+  % Iperbole: y^2 - x^2 = 1  ->  y = ±sqrt(1+x^2)
+  \begin{scope}
+    \clip (-4.1,-4.1) rectangle (4.1,4.1);
+    \draw[thick, smooth, samples=100, domain=-4.2:4.2]
+      plot (\x, {sqrt(1+\x*\x)});
+    \draw[thick, smooth, samples=100, domain=-4.2:4.2]
+      plot (\x, {-sqrt(1+\x*\x)});
+  \end{scope}
+
+  % Retta verticale tratteggiata in x = -2
+  \draw[dashed] (-2,-4.2) -- (-2,4.2);
+
+  % Punti sulle due branche
+  \fill (-2, {sqrt(5)})  circle (2pt);
+  \fill (-2, {-sqrt(5)}) circle (2pt);
+
+\end{tikzpicture}
+\end{center}
+Per tracciare un grafico sapendo l'espressione analitica della funzione si può procedere a punti sostituendo alla $x$ dei valori opportuni alla costruzione del grafico.
+
+\begin{definizione}
+    Due funzioni $f$ e $g$ sono uguali se hanno lo stesso dominio $X$ e inoltre risulta:
+    \begin{equation}
+        f(x)=g(x)\quad\forall x\in X
+    \end{equation}
+\end{definizione}
+ESEMPIO 1: $f(x)=x^2-1$ e $g(x)=\dfrac{x^4-1}{x^2+1}$
+
+Il dominio è uguale tra le due funzione, il dominio è $\R$.
+
+Se poniamo $f(x)=g(x)$:
+
+$\begin{array}{l}
+    x^2-1=\dfrac{x^4-1}{x^2+1}\\
+    x^2-1=\dfrac{(x^2+1)(x^2-1)}{x^2+1}\\
+    x^2-1=x^2-1\\
+    \forall x\in\R
+\end{array}$
+
+
+Le due funzioni sono uguali per ogni $x$ nel dominio, quindi $f(x)=g(x)$
+
+ESEMPIO 2: $f(x)=x+1$ e $g(x)=\dfrac{x^2-1}{x-1}$
+
+Il dominio di $f(x)$ è $\R$, mentre il dominio di $g(x)$ è $\R\setminus\set{1}$ quindi $f(x)\ne g(x)$.
 \end{document}
