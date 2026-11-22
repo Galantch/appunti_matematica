@@ -1,5 +1,6 @@
 \documentclass[a4paper]{article}
 \usepackage{graphicx} % Required for inserting images
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{a4wide}
@@ -58,7 +59,7 @@ Esempio: $3x^2=0\implies x=0$
 L'equazione si riconduce a $x^n=-\dfrac{b}{a}$.
 
 
-Esempio $1$: $(x+10)^3=-8$
+Esempio 1: $(x+10)^3=-8$
 
 
 $\begin{array}{l}
@@ -69,7 +70,7 @@ $\begin{array}{l}
 \end{array}$
 
 
-Esempio $2$: $4(x-1)^4=25$
+Esempio 2: $4(x-1)^4=25$
 
 $\begin{array}{l}
     4(x-1)^4=25\\
@@ -84,7 +85,7 @@ $\begin{array}{l}
     \end{equation}
     dove $a,b,c\in\R\setminus\set{0}$ ed $n\in\Z^+$.
 \end{definizione}
-Se $n=1$ l'equazione trinomia è riconducile a un'equazione di $\mathrm{II}^\circ$ grado.
+Se $n=1$ l'equazione trinomia è riconducibile a un'equazione di $\mathrm{II}^\circ$ grado.
 
 Se $n=2$ l'equazione trinomia è nella forma $ax^4+bx^2+c=0$ ed è detta biquadratica.
 
@@ -143,6 +144,7 @@ $\begin{array}{l}
     x^3+8=0\\
     (x+2)(x^2-2x+4)=0\\
     x+2=0\lor x^2-2x+4=0\\
+    x=-2\lor\nexists x\in\R\quad(\Delta<0)\\
     x=-2
 \end{array}$
 
@@ -213,7 +215,7 @@ Esempio 1: $x^4-3x^2+4\leq0$
 $\begin{array}{l}
    x^2=t\quad x^4=t^2\\
    t^2-3t+4\leq0\\
-   \Delta<0\implies\text{eq. associata }\nexists t\in\R \implies\nexists x\in\R\\
+   \Delta<0\land a>0\implies t^2-3t+4>0\ \ \forall t\in\R\\
    \text{diseq. }\nexists x\in\R
 \end{array}$
 
@@ -237,7 +239,7 @@ Esempio: $x^3-x^2\leq 4x-4$
 
 $\begin{array}{l}
     x^3-x^2-4x+4\leq0\\
-    x^2(x-1)-4(x+1)\leq0\\
+    x^2(x-1)-4(x-1)\leq0\\
     (x-1)(x^2-4)\leq0\\
     F_1>0\quad x-1>0\implies x>1\\
     F_2>0\quad x^2-4>0\implies x<-2\lor x>2
@@ -372,7 +374,7 @@ $-2<x<2\lor x\geq5$
 \begin{definizione}
     Un insieme di $2$ o più disequazioni, tutte nella stessa incognita, che si vuole siano soddisfatte contemporaneamente, si chiama sistema di disequazioni.
 \end{definizione}
-Esempio:$\begin{cases}
+Esempio: $\begin{cases}
     \dfrac{5-x}{x+2}\geq0\\
     \dfrac{1}{2}x^2+x>4
 \end{cases}$
@@ -489,7 +491,7 @@ $2<x\leq5$
 \begin{definizione}
     Un'equazione o una disequazione si chiama irrazionale quando contiene almeno un radicale nel cui radicando compare l'incognita.
 \end{definizione}
-Se l'indice del radicando è dispari, sia in un'equazione sia in una disequazione, elevando all'indice entrambi i membri si ottiene un'equazione, o una disequazione, equivalente.
+Se l'indice del radicale è dispari, sia in un'equazione sia in una disequazione, elevando all'indice entrambi i membri si ottiene un'equazione, o una disequazione, equivalente.
 Se invece l'indice è pari allora si procede nel seguente modo, chiamato $n$ l'indice, con $n\in\N$ e $n\geq2$:
 \begin{equation}
     \sqrt[n]{A(x)}=B(x)\iff\begin{cases}
@@ -497,7 +499,7 @@ Se invece l'indice è pari allora si procede nel seguente modo, chiamato $n$ l'i
         A(x)=B^n(x)
     \end{cases}
 \end{equation}
-In questo sistema è esclusa la condizione di esistenza del radicale, $A(x)\geq0$, poiché è già soddisfatta nella seconda equazione, dovendo $A(x)$ essere uguale a un quadrato. $B(x)\ge0$ è la concordanza del segno, dovendo un radicale con indice pari essere uguale a una quantità non negativa.
+In questo sistema è esclusa la condizione di esistenza del radicale, $A(x)\geq0$, poiché è già soddisfatta nella seconda equazione, dovendo $A(x)$ essere uguale a una potenza di esponente pari. $B(x)\ge0$ è la concordanza del segno, dovendo un radicale con indice pari essere uguale a una quantità non negativa.
 
 Esempio: $\sqrt{x^2+4}=2x-2$
 
@@ -520,16 +522,16 @@ $\begin{array}{l}
 Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sveltire i calcoli:
 \begin{enumerate}
     \item $k<0$: $\nexists x\in\R$
-    \item $k\geq0$: $A(x)=k^2$
+    \item $k\geq0$: $A(x)=k^n$
 \end{enumerate}
 Se in un'equazione compare più di un radicale si procede nel seguente modo:
 \begin{enumerate}
     \item Si determina il dominio dell'equazione ponendo ogni radicando non negativo e ogni denominatore non nullo;
-    \item Dopo aver fatto in modo che vi siano solo somme, si elevano entrambi i membri all'indice comune dei radicali che vi compaiono.
+    \item Dopo aver isolato i radicali in modo che entrambi i membri siano non negativi, si elevano entrambi i membri all'indice comune dei radicali che vi compaiono.
 \end{enumerate}
-Esempio: $\sqrt{x}-\sqrt{x-5}=-\sqrt{x-3}$
+Esempio: $\sqrt{x}-\sqrt{x+5}=-\sqrt{x-3}$
 
-Condizioni di esistenza:$\begin{cases}
+Condizioni di esistenza: $\begin{cases}
     x\geq0\\
     x+5\geq0\\
     x-3\geq0
@@ -546,7 +548,7 @@ $\begin{array}{l}
     \end{cases}\\
     x=-\dfrac{16}{3}\lor x=4\\
     \begin{cases}
-        x\geq3\\
+        3\leq x\leq8\\
         x=-\dfrac{16}{3}\lor x=4
     \end{cases} \implies x=4
 \end{array}$
@@ -664,7 +666,7 @@ $\begin{array}{l}
         9-x^2\geq0 
    \end{cases}\cup\begin{cases}
        x+3\geq0\\
-       9-x^2<(x+3)^2
+       9-x^2>(x+3)^2
    \end{cases}\\
    \begin{cases}
        x<-3\\
@@ -702,12 +704,10 @@ $\begin{array}{l}
     \node[closed] at (\xa,-2) {};
     \node[closed] at (\xb,-2) {};
 
-    % Riga 2: x < -3 oppure x > 3
+    % Riga 2: x < -3
     \draw[thick]        (-0.5,-4) -- (\xa,-4);
-    \draw[thick,dashed] (\xa,-4) -- (\xb,-4);
-    \draw[thick]        (\xb,-4) -- (9,-4);
+    \draw[thick,dashed] (\xa,-4) -- (9,-4);
     \node[open] at (\xa,-4) {};
-    \node[open] at (\xb,-4) {};
 
     % Etichetta
     \node at (4.25,-6.5) {Primo sistema};
@@ -732,7 +732,7 @@ $\begin{array}{l}
     \foreach \x in {\xa,\xb}
       \draw[very thick] (\x,0.2) -- (\x,-5);
 
-    % Riga 1: x > -3
+    % Riga 1: x >= -3
     \draw[thick,dashed] (-0.5,-2) -- (\xa,-2);
     \draw[thick]        (\xa,-2) -- (9,-2);
     \node[closed] at (\xa,-2) {};
@@ -750,7 +750,7 @@ $\begin{array}{l}
 
 \end{tikzpicture}
 
-$\implies3<x<0$
+$\implies-3<x<0$
 
 Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sveltire i calcoli:
 \begin{enumerate}
@@ -758,7 +758,7 @@ Se il secondo membro è un numero $k\in\R$ allora esistono delle tecniche per sv
     \item $\sqrt{A(x)}>k$, con $k=0$: $A(x)>0$
     \item $\sqrt{A(x)}>k$, con $k>0$: $A(x)>k^2$
 \end{enumerate}
-In caso il segno di radice compaia in più di un radicale occorre procedere nello stesso modo delle equazioni.
+In caso compaia più di un radicale occorre procedere nello stesso modo delle equazioni.
 \newpage
 \section{Equazioni e disequazioni con valori assoluti}
 \begin{definizione}
@@ -809,7 +809,7 @@ Per risolvere equazioni del tipo $|A(x)|=|B(x)|$ si sfrutta la $7^a$ proprietà 
 \begin{equation}
     |A(x)|=|B(x)|\iff A(x)=B(x)\lor A(x)=-B(x)
 \end{equation}
-Se invece compare più di un modulo in un'equazione bisogna studiare il segno di ogni modulo e costruire tanti sistemi quanto sono gli intervalli trovati dallo studio.
+Se invece compare più di un modulo in un'equazione bisogna studiare il segno di ogni modulo e costruire tanti sistemi quanti sono gli intervalli trovati dallo studio.
 
 Per risolvere disequazioni del tipo $|A(x)|<B(x)$ si ricorre al seguente metodo:
 \begin{equation}
@@ -822,9 +822,9 @@ Per risolvere disequazioni del tipo $|A(x)|>B(x)$ si ricorre al seguente metodo:
 \begin{equation}
     |A(x)|>B(x)\iff A(x)<-B(x)\lor A(x)>B(x)
 \end{equation}
-Per risolvere equazioni del tipo $|A(x)|\lessgtr|B(x)|$ si sfrutta la $2^a$ proprietà dei moduli:
+Per risolvere disequazioni del tipo $|A(x)|\lessgtr|B(x)|$ si sfrutta la $2^a$ proprietà dei moduli:
 \begin{equation}
-    |A(x)|\lessgtr|B(x)|\iff A^2(x)=B^2(x)
+    |A(x)|\lessgtr|B(x)|\iff A^2(x)\lessgtr B^2(x)
 \end{equation}
 Se invece compare più di un modulo bisogna ricondursi allo stesso metodo delle equazioni con più moduli.
 \newpage
@@ -845,7 +845,7 @@ dove $f(x)$ è l'espressione analitica della funzione, oppure mediante la seguen
 \end{equation}
 dove al posto dei puntini c'è l'espressione analitica della funzione.
 
-ESEMPIO 1: $f:\R\to\R_0^+$, funzione che associa a ogni numero reale in suo quadrato, può essere definita in una delle seguenti forme:
+ESEMPIO 1: $f:\R\to\R_0^+$, funzione che associa a ogni numero reale il suo quadrato, può essere definita in una delle seguenti forme:
 
 $y=x^2\quad f(x)=x^2$
 
@@ -855,7 +855,7 @@ $y=x\quad f(x)=x$
 
 In un'equazione $y=f(x)$, $x$ è la variabile indipendente e $y$ la variabile dipendente da $x$.
 
-Di seguito è riportata la suddivisione delle funzione reali di variabile reale:
+Di seguito è riportata la suddivisione delle funzioni reali di variabile reale:
 \begin{enumerate}
     \item Algebriche
     \begin{enumerate}
@@ -889,9 +889,9 @@ $\begin{cases}
 
 Quindi il dominio della funzione è l'intervallo $[2,+\infty)$.
 
-Il grafico di una funzione $f:X\to Y$ è l'insieme $\set{x,f(x):x\in X}$.
+Il grafico di una funzione $f:X\to Y$ è l'insieme $\set{(x,f(x)):x\in X}$.
 
-Per capire se un grafico è un grafico di una funzione bisogna tracciare delle rette parallele all'asse $y$. Se almeno una retta interseca più di un punto sul grafico allora il grafico non rappresenta una funzione.
+Per capire se un grafico è un grafico di una funzione bisogna tracciare delle rette parallele all'asse $y$. Se almeno una retta interseca il grafico in più di un punto allora il grafico non rappresenta una funzione.
 \newpage
 ESEMPIO 1: Grafico di una funzione
 
@@ -960,7 +960,7 @@ Per tracciare un grafico sapendo l'espressione analitica della funzione si può 
 \end{definizione}
 ESEMPIO 1: $f(x)=x^2-1$ e $g(x)=\dfrac{x^4-1}{x^2+1}$
 
-Il dominio è uguale tra le due funzione, il dominio è $\R$.
+Il dominio è uguale tra le due funzioni, il dominio è $\R$.
 
 Se poniamo $f(x)=g(x)$:
 
@@ -972,9 +972,9 @@ $\begin{array}{l}
 \end{array}$
 
 
-Le due funzioni sono uguali per ogni $x$ nel dominio, quindi $f(x)=g(x)$
+Le due funzioni sono uguali per ogni $x$ nel dominio, quindi $f=g$.
 
 ESEMPIO 2: $f(x)=x+1$ e $g(x)=\dfrac{x^2-1}{x-1}$
 
-Il dominio di $f(x)$ è $\R$, mentre il dominio di $g(x)$ è $\R\setminus\set{1}$ quindi $f(x)\ne g(x)$.
+Il dominio di $f(x)$ è $\R$, mentre il dominio di $g(x)$ è $\R\setminus\set{1}$ quindi $f\ne g$.
 \end{document}
