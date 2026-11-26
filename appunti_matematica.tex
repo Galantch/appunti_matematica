@@ -1187,6 +1187,229 @@ Questa funzione è strettamente crescente in $[A,B]$, strettamente decrescente i
     Una funzione crescente o decrescente in un insieme $I$ viene detta monotòna in $I$.
 \end{definizione}
 \newpage
+\subsection{Funzioni iniettive, suriettive, biiettive}
+Le funzioni si possono classificare in base al loro comportamento rispetto al codominio.
+\begin{definizione}
+    Una funzione $f:X\to Y$ si dice iniettiva se ogni elemento di $Y$ ha al massimo una controimmagine in $X$.
+\end{definizione}
+\begin{figure}[htbp]
+  \centering
+  % --- PRIMO GRAFICO ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-6.5, 0) -- (2.2, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -2.5) -- (0, 5.5) node[below left] {$y$};
+      \node[below left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-6.5, -1.5) -- (1.8, -1.5);
+      \draw[dashed, thick] (-6.5, 2.0) -- (1.8, 2.0);
+      \draw[dashed, thick] (-6.5, 3.5) -- (1.8, 3.5);
+
+      % Curva esponenziale y = f(x) = 2.5 * 1.4^x
+      \draw[very thick, domain=-5.5:1.6, samples=100] plot (\x, {2.5 * (1.4^\x)});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, domain=-6.3:-5.5, samples=20] plot (\x, {2.5 * (1.4^\x)});
+      \draw[very thick, dashed, domain=1.6:1.95, samples=20] plot (\x, {2.5 * (1.4^\x)});
+
+      % Etichetta
+      \node at (-3.8, 1.3) {$y = f(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $f(x)$ è iniettiva.}
+  \end{minipage}
+  \hfill
+  % --- SECONDO GRAFICO ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-4.5, 0) -- (4.5, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -3.8) -- (0, 4.5) node[below left] {$y$};
+      \node[below left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-4.3, 2.0) -- (4.3, 2.0);
+      \draw[dashed, thick] (-4.3, -2.0) -- (4.3, -2.0);
+      \draw[dashed, thick] (-4.3, -3.0) -- (4.3, -3.0);
+
+      % Parabola y = g(x) = 0.8 * x^2
+      \draw[very thick, smooth, domain=-2.1:2.1, samples=150] plot (\x, {0.8 * \x * \x});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, smooth, domain=-2.3:-2.1, samples=20] plot (\x, {0.8 * \x * \x});
+      \draw[very thick, dashed, smooth, domain=2.1:2.3, samples=20] plot (\x, {0.8 * \x * \x});
+
+      % Etichetta
+      \node at (2.8, 1.0) {$y = g(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $g(x)$ non è iniettiva.}
+  \end{minipage}
+\end{figure}
+\begin{definizione}
+    Una funzione $f:X\to Y$ si dice suriettiva se ogni elemento di $Y$ ha almeno una controimmagine in $X$.
+\end{definizione}
+\begin{figure}[htbp]
+  \centering
+  % --- PRIMO GRAFICO (FUNZIONE SURIETTIVA) ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-4.5, 0) -- (4.5, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -4.5) -- (0, 4.5) node[below left] {$y$};
+      \node[above left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-4.3, 1.5) -- (4.3, 1.5);
+      \draw[dashed, thick] (-4.3, -0.5) -- (4.3, -0.5);
+      \draw[dashed, thick] (-4.3, -3.5) -- (4.3, -3.5);
+
+      % Curva cubica y = f(x) = 0.25 * x^3 - 0.75 * x^2
+      \draw[very thick, smooth, domain=-1.95:3.8, samples=150] plot (\x, {0.25 * \x * \x * \x - 0.75 * \x * \x});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, smooth, domain=-2.15:-1.95, samples=20] plot (\x, {0.25 * \x * \x * \x - 0.75 * \x * \x});
+      \draw[very thick, dashed, smooth, domain=3.8:4.0, samples=20] plot (\x, {0.25 * \x * \x * \x - 0.75 * \x * \x});
+
+      % Punti di intersezione con le rette tratteggiate
+      \fill (3.47, 1.5) circle (3.5pt);
+      \fill (-0.73, -0.5) circle (3.5pt);
+      \fill (1.0, -0.5) circle (3.5pt);
+      \fill (2.73, -0.5) circle (3.5pt);
+      \fill (-1.78, -3.5) circle (3.5pt);
+
+      % Etichetta
+      \node at (-3.1, -1.8) {$y = f(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $f(x)$ è suriettiva.}
+  \end{minipage}
+  \hfill
+  % --- SECONDO GRAFICO (FUNZIONE NON SURIETTIVA) ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-4.5, 0) -- (4.5, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -3.8) -- (0, 4.5) node[below left] {$y$};
+      \node[below left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-4.3, 2.0) -- (4.3, 2.0);
+      \draw[dashed, thick] (-4.3, -2.0) -- (4.3, -2.0);
+      \draw[dashed, thick] (-4.3, -3.0) -- (4.3, -3.0);
+
+      % Parabola y = g(x) = 0.8 * x^2
+      \draw[very thick, smooth, domain=-2.1:2.1, samples=150] plot (\x, {0.8 * \x * \x});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, smooth, domain=-2.3:-2.1, samples=20] plot (\x, {0.8 * \x * \x});
+      \draw[very thick, dashed, smooth, domain=2.1:2.3, samples=20] plot (\x, {0.8 * \x * \x});
+
+      % Punti di intersezione con y = 2.0
+      \fill (-1.58, 2.0) circle (3.5pt);
+      \fill (1.58, 2.0) circle (3.5pt);
+
+      % Etichetta
+      \node at (2.8, 1.0) {$y = g(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $g(x)$ non è suriettiva.}
+  \end{minipage}
+\end{figure}
+\begin{definizione}
+    Una funzione $f:X\to Y$ che è sia iniettiva sia suriettiva si dice biiettiva.
+\end{definizione}
+\begin{figure}[htbp]
+  \centering
+  % --- PRIMO GRAFICO (FUNZIONE BIIETTIVA) ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-4.5, 0) -- (4.5, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -4.5) -- (0, 4.5) node[below left] {$y$};
+      \node[below left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-4.3, 3.0) -- (4.3, 3.0);
+      \draw[dashed, thick] (-4.3, 1.8) -- (4.3, 1.8);
+      \draw[dashed, thick] (-4.3, -2.5) -- (4.3, -2.5);
+
+      % Curva cubica monotona y = f(x) = 0.15 * x^3
+      \draw[very thick, smooth, domain=-3.0:3.0, samples=150] plot (\x, {0.15 * \x * \x * \x});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, smooth, domain=-3.15:-3.0, samples=20] plot (\x, {0.15 * \x * \x * \x});
+      \draw[very thick, dashed, smooth, domain=3.0:3.15, samples=20] plot (\x, {0.15 * \x * \x * \x});
+
+      % Etichetta
+      \node at (2.5, -1.2) {$y = f(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $f(x)$ è biiettiva.}
+  \end{minipage}
+  \hfill
+  % --- SECONDO GRAFICO (FUNZIONE NON BIIETTIVA) ---
+  \begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.45, >=Latex]
+      % Assi
+      \draw[thick, ->] (-4.5, 0) -- (4.5, 0) node[below left] {$x$};
+      \draw[thick, ->] (0, -4.5) -- (0, 4.5) node[below left] {$y$};
+      \node[below left] at (0, 0) {$O$};
+
+      % Linee orizzontali tratteggiate
+      \draw[dashed, thick] (-4.3, 1.8) -- (4.3, 1.8);
+      \draw[dashed, thick] (-4.3, -1.8) -- (4.3, -1.8);
+
+      % Curva cubica con massimo e minimo locali y = g(x) = 0.7 * x^3 - 2.6 * x
+      \draw[very thick, smooth, domain=-2.25:2.25, samples=150] plot (\x, {0.7 * \x * \x * \x - 2.6 * \x});
+      % Estremità tratteggiate
+      \draw[very thick, dashed, smooth, domain=-2.35:-2.25, samples=20] plot (\x, {0.7 * \x * \x * \x - 2.6 * \x});
+      \draw[very thick, dashed, smooth, domain=2.25:2.35, samples=20] plot (\x, {0.7 * \x * \x * \x - 2.6 * \x});
+
+      % Etichetta
+      \node at (2.8, -3.1) {$y = g(x)$};
+    \end{tikzpicture}
+    \caption{La funzione $g(x)$ non è biiettiva.}
+  \end{minipage}
+\end{figure}
+\newpage
+Questa classificazione può essere vista anche mediante la seguente rappresentazione insiemistica.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[scale=0.85]
+    % Rettangolo universo (Funzioni)
+    \draw[thick] (-4.5, -2.5) rectangle (4.5, 2.5);
+    \node at (0, 2.8) {\textbf{Funzioni}};
+
+    % Ellissi intersecanti con area centrale più ampia
+    \draw[thick] (-1.2, 0) ellipse (2.4cm and 1.5cm);
+    \draw[thick] (1.2, 0) ellipse (2.4cm and 1.5cm);
+
+    % Testi posizionati comodamente all'interno delle rispettive zone
+    \node at (-2.3, 0) {iniettive};
+    \node at (0, 0) {biiettive};
+    \node at (2.3, 0) {suriettive};
+    \node at (0, -1.9) {né iniettive né suriettive};
+  \end{tikzpicture}
+  \caption{Diagramma di Venn delle funzioni.}
+\end{figure}
+\newpage
+\subsection{Funzioni composte}
+\begin{definizione}
+    Date due funzioni $f$ e $g$, si dice funzione composta di $f$ e $g$, e si indica con il simbolo $g\circ f$, la funzione definita da:
+    \begin{equation}
+        (g\circ f)(x)=g(f(x))
+    \end{equation}
+\end{definizione}
+Il dominio di $g\circ f$ è costituito da tutti gli elementi appartenenti al dominio di $f$ tali che $f(x)$ appartiene al dominio di $g$.
+
+ESEMPIO: $f(x)=x-1\quad g(x)=\sqrt{x+3}$
+
+$\begin{array}{ll}
+    (g\circ f)(x)=g(f(x))=g(x-1)=\sqrt{(x-1)+3}=\sqrt{x+2} & D=[-2,+\infty[ \\
+    (f\circ g)(x)=f(g(x))=f(\sqrt{x+3})=\sqrt{x+3}-1 & D=[-3,+\infty[
+\end{array}$
+
+Ciò mostra che $f\circ g\ne g\circ f$, quindi la composizione di due funzioni non è commutativa.
+\newpage
 \begin{thebibliography}{9}
 \bibitem{articolo1}
 L. Sasso, E. Zoli, 
